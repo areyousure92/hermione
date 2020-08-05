@@ -7,7 +7,8 @@ export default () => {
         <title>Hermione</title>
       </head>
       <body>
-        <div id="root">Hello world!!!!</div>
+        <div id="root"></div>
+        <script src="/dist/bundle.js"></script>
       </body>
     </html>
   `;

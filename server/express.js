@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -10,7 +11,12 @@ import authRoutes from './routes/auth.routes';
 import deckRoutes from './routes/deck.routes';
 import cardRoutes from './routes/card.routes';
 
+import devBundle from './devBundle'; // development
+
+const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
+
+devBundle.compile(app); // development
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +24,8 @@ app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 app.use(cors());
+
+app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
 app.use('/', userRoutes);
 app.use('/', authRoutes);
