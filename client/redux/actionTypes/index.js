@@ -10,4 +10,11 @@ export const SHOW_SIGNUP_FORM = 'SHOW_SIGNUP_FORM';
 export const SIGNUP = 'SIGNUP';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
+// deck
+export const GET_DECKLIST = 'GET_DECKLIST';
+export const GET_DECKLIST_ERROR = 'GET_DECKLIST_ERROR';
+export const CREATE_DECK = 'CREATE_DECK';
+export const CREATE_DECK_ERROR = 'CREATE_DECK_ERROR';
+export const DELETE_DECK = 'DELETE_DECK';
+export const DELETE_DECK_ERROR = 'DELETE_DECK_ERROR';
 

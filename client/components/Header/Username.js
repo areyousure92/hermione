@@ -1,10 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Username = () => {
+const Username = ({ username }) => {
   return (
-    <div>Username</div>
+    <div>
+      { username }
+    </div>
   );
 }
 
-export default Username;
+Username.propTypes = {
+  username: PropTypes.string,
+};
+
+const mapStateToProps = (state) => ({
+  username: state.auth.username,
+});
+
+export default connect(mapStateToProps)(Username);
 
