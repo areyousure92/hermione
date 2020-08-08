@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { deleteDeckFetch } from '../../../redux/actions/deckActions';
 
 const DeckListItem = ({ deckname, userId, deckId, deleteDeck, getDeckList }) => {
@@ -14,7 +15,7 @@ const DeckListItem = ({ deckname, userId, deckId, deleteDeck, getDeckList }) => 
     <li>
       <div>
         { deckname + " " }
-        <input type="button" value="Посмотреть" />
+        <Link to={`/deck/${deckId}`}>Посмотреть</Link>
         <input type="button" value="Удалить" onClick={deleteHandler} />
         <input type="button" value="Учить" />
       </div>

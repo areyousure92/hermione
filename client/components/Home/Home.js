@@ -7,7 +7,7 @@ import DeckList from './DeckList/DeckList';
 const Home = ({ isSignedIn }) => {
   return (
     <div>
-      Home
+      <h2>Home</h2>
       <DeckList />
       {
         isSignedIn

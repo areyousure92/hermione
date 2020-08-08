@@ -18,3 +18,9 @@ export const CREATE_DECK_ERROR = 'CREATE_DECK_ERROR';
 export const DELETE_DECK = 'DELETE_DECK';
 export const DELETE_DECK_ERROR = 'DELETE_DECK_ERROR';
 
+// card 
+export const CREATE_CARD = 'CREATE_CARD';
+export const CREATE_CARD_ERROR = 'CREATE_CARD_ERROR';
+export const GET_CARDLIST = 'GET_CARDLIST';
+export const GET_CARDLIST_ERROR = 'GET_CARDLIST_ERROR';
+
