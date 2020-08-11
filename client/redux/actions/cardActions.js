@@ -3,6 +3,8 @@ import {
   GET_CARDLIST_ERROR,
   CREATE_CARD,
   CREATE_CARD_ERROR,
+  UPDATE_CARD,
+  UPDATE_CARD_ERROR,
 } from '../actionTypes';
 
 function getCardList(cards) {
@@ -33,6 +35,7 @@ function getCardListFetch(userId, deckId) {
       } else {
         dispatch(getCardList(data));
       }
+      return data;
     });
 }
 
@@ -72,8 +75,46 @@ function createCardFetch(userId, deckId, cardData) {
     .catch((err) => console.log(err));
 }
 
+function updateCard(card) {
+  return {
+    type: UPDATE_CARD,
+    payload: card,
+  };
+}
+
+function updateCardError(errorMessage) {
+  return {
+    type: UPDATE_CARD_ERROR,
+    payload: errorMessage,
+  };
+}
+
+function updateCardFetch(userId, deckId, cardId, cardData) {
+  return (dispatch) => fetch(
+    `http://localhost:3000/api/cards/${userId}/${deckId}/${cardId}`, 
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(cardData),
+    }
+  )
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data.error) {
+        dispatch(updateCardError(data.error));        
+      } else {
+        dispatch(updateCard(data));
+      }
+      return data;
+    });
+}
+
 export {
   getCardListFetch,
   createCardFetch,
+  updateCardFetch,
 };
 

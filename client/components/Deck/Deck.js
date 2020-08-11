@@ -18,6 +18,7 @@ const Deck = ({ decks }) => {
       <Link to="/">На главную</Link>
       <Link to={`/deck/${deckId}/cardlist`}>Посмотреть список карт</Link>
       <Link to={`/deck/${deckId}/addcard`}>Добавить карту</Link>
+      <Link to={`/learn/${deckId}`}>Учить эту колоду</Link>
 
       <Switch>
         <Route 

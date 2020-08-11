@@ -17,7 +17,7 @@ const DeckListItem = ({ deckname, userId, deckId, deleteDeck, getDeckList }) => 
         { deckname + " " }
         <Link to={`/deck/${deckId}`}>Посмотреть</Link>
         <input type="button" value="Удалить" onClick={deleteHandler} />
-        <input type="button" value="Учить" />
+        <Link to={`/learn/${deckId}`}>Учить</Link>
       </div>
     </li>
   );
