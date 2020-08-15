@@ -16,7 +16,13 @@ const CardList = ({ getCardList, cards, userId }) => {
   }, [userId, deckId]);
 
   const cardList = cards.map((card) => 
-    <CardListItem key={card._id} card={card} />
+    <CardListItem 
+      key={card._id} 
+      card={card} 
+      deckId={deckId} 
+      userId={userId}
+      getCardList={getCardList}
+    />
   );
 
   return (

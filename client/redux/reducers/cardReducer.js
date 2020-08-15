@@ -5,6 +5,8 @@ import {
   CREATE_CARD_ERROR,
   UPDATE_CARD,
   UPDATE_CARD_ERROR,
+  DELETE_CARD,
+  DELETE_CARD_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -40,6 +42,12 @@ const cardReducer = (state = initialState, action) => {
 
     case UPDATE_CARD_ERROR:
       return { ...state, updateCardErrorMessage: action.payload };
+
+    case DELETE_CARD:
+      return { ...state, deletedCard: action.payload };
+
+    case DELETE_CARD_ERROR:
+      return { ...state, deleteCardErrorMessage: action.payload };
       
     default:
       return state;

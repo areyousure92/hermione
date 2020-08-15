@@ -25,6 +25,8 @@ export const GET_CARDLIST = 'GET_CARDLIST';
 export const GET_CARDLIST_ERROR = 'GET_CARDLIST_ERROR';
 export const UPDATE_CARD = 'UPDATE_CARD';
 export const UPDATE_CARD_ERROR = 'UPDATE_CARD_ERROR';
+export const DELETE_CARD = 'DELETE_CARD';
+export const DELETE_CARD_ERROR = 'DELETE_CARD_ERROR';
 
 // learn
 export const GET_CARDS_TO_LEARN = 'GET_CARDS_TO_LEARN';
