@@ -1,3 +1,4 @@
+import auth from '../../lib/auth/auth-helper';
 import {
   GET_CARDLIST,
   GET_CARDLIST_ERROR,
@@ -26,6 +27,9 @@ function getCardListFetch(userId, deckId) {
     `http://localhost:3000/api/cards/${userId}/${deckId}`,
     {
       method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + auth.isAuthenticated(),
+      },
     }
   )
     .then((resp) => resp.json())
@@ -60,6 +64,7 @@ function createCardFetch(userId, deckId, cardData) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': 'Bearer ' + auth.isAuthenticated(),
       },
       body: JSON.stringify(cardData),
     }
@@ -97,6 +102,7 @@ function updateCardFetch(userId, deckId, cardId, cardData) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Authorization': 'Bearer ' + auth.isAuthenticated(),
       },
       body: JSON.stringify(cardData),
     }

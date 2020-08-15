@@ -1,3 +1,4 @@
+import auth from '../../lib/auth/auth-helper';
 import {
   GET_DECKLIST,
   GET_DECKLIST_ERROR,
@@ -24,6 +25,9 @@ function getDeckListError(errorMessage) {
 function getDeckListFetch(userId) {
   return (dispatch) => fetch(`http://localhost:3000/api/decks/${userId}`, {
     method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + auth.isAuthenticated(),
+    }
   })
     .then((resp) => resp.json())
     .then((data) => {
@@ -55,6 +59,7 @@ function createDeckFetch(deckData, userId) {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      'Authorization': 'Bearer ' + auth.isAuthenticated(),
     },
     body: JSON.stringify(deckData),
   })
@@ -85,6 +90,9 @@ function deleteDeckError(errorMessage) {
 function deleteDeckFetch(userId, deckId) {
   return (dispatch) => fetch(`http://localhost:3000/api/decks/${userId}/${deckId}`, {
     method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer ' + auth.isAuthenticated(),
+    },
   })
     .then((resp) => resp.json())
     .then((data) => {

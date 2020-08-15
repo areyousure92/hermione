@@ -1,13 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import auth from '../../lib/auth/auth-helper';
 
 const PrivateRoute = ({ component: Component, isSignedIn, ...rest }) => {
   return (
     <Route { ...rest } render={props => (
-      isSignedIn
+      auth.isAuthenticated()
         ? <Component { ...props } />
-        : <Redirect to="auth" />
+        : <Redirect to={{
+            pathname: "/auth",
+            state: { from: props.location }
+          }} />
     )} />
   );
 }

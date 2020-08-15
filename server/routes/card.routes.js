@@ -7,13 +7,13 @@ import cardCtrl from '../controllers/card.controller';
 const router = express.Router();
 
 router.route('/api/cards/:userId/:deckId')
-  .post(cardCtrl.create)
-  .get(cardCtrl.getCardList);
+  .post(authCtrl.requireSignin, authCtrl.hasAuthorization, cardCtrl.create)
+  .get(authCtrl.requireSignin, authCtrl.hasAuthorization, cardCtrl.getCardList);
 
 router.route('/api/cards/:userId/:deckId/:cardId')
-  .get(cardCtrl.read)
-  .put(cardCtrl.update)
-  .delete(cardCtrl.remove);
+  .get(authCtrl.requireSignin, authCtrl.hasAuthorization, cardCtrl.read)
+  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, cardCtrl.update)
+  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, cardCtrl.remove);
 
 router.param('userId', userCtrl.userByID);
 router.param('deckId', deckCtrl.deckByID);

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import auth from '../../lib/auth/auth-helper';
 import Signin from './Signin';
 import Signup from './Signup';
 import {
@@ -41,19 +42,16 @@ const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
   return (
     <div>
       {
-        isSignedIn
+        isSignedIn && auth.isAuthenticated()
           ? <Redirect to="/" />
           : null
       }
-      <Link to="/">Home</Link>
-      <br />
       { form }
     </div>
   );
 }
 
 Auth.propTypes = {
-  isSignedIn: PropTypes.bool.isRequired,
   showSigninForm: PropTypes.bool.isRequired,
   showSignin: PropTypes.func.isRequired,
   showSignup: PropTypes.func.isRequired,
