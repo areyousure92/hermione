@@ -6,6 +6,7 @@ import {
   CREATE_DECK_ERROR,
   DELETE_DECK,
   DELETE_DECK_ERROR,
+  READ_DECK,
 } from '../actionTypes';
 
 function getDeckList(decks) {
@@ -104,10 +105,34 @@ function deleteDeckFetch(userId, deckId) {
     });
 }
 
+function readDeck(deck) {
+  return {
+    type: READ_DECK,
+    payload: deck,
+  };
+}
+
+function readDeckFetch(userId, deckId) {
+  return (dispatch) => 
+    fetch(`http://localhost:3000/api/decks/${userId}/${deckId}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + auth.isAuthenticated(),
+        },
+      },
+    )
+      .then((resp) => resp.json()) 
+      .then((data) => {
+        dispatch(readDeck(data));
+      });
+}
+
 export {
   getDeckListFetch,
   createDeckFetch,
   deleteDeckFetch,
+  readDeckFetch,
 };
 
 

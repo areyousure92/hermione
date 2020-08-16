@@ -32,7 +32,7 @@ app.use('/', authRoutes);
 app.use('/', deckRoutes);
 app.use('/', cardRoutes);
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.status(200).send(Template());
 });
 
