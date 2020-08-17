@@ -28,6 +28,10 @@ const config = {
             loader: 'file-loader',
           }
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   }
