@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch, Route, Link, useParams } from 'react-router-dom';
+import { 
+  Switch, 
+  Route, 
+  Link, 
+  useParams, 
+  useHistory,
+} from 'react-router-dom';
+import ReactModal from 'react-modal';
 import CardList from './CardList/CardList';
 import AddCard from './AddCard';
 import { 
@@ -9,8 +16,19 @@ import {
   readDeckFetch,
 } from '../../redux/actions/deckActions';
 
+ReactModal.setAppElement('#root');
+
 const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
+  const history = useHistory();
   const { deckId } = useParams();
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
   
   useEffect(() => {
     const fetchReadDeck = async (userId) => {
@@ -21,7 +39,9 @@ const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
 
   const deleteHandler = (e) => {
     e.preventDefault();
-    deleteDeck(userId, deckId);
+    deleteDeck(userId, deckId)
+      .then(closeModal())
+      .then(history.push('/'))
   }
 
   return (
@@ -36,7 +56,7 @@ const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
       <br />
       <Link to={`/learn/${deckId}`}>Учить эту колоду</Link>
       <br />
-      <button type="button" onClick={deleteHandler} >Удалить эту колоду</button>
+      <button onClick={openModal}>Удалить эту колоду</button>
 
       <Switch>
         <Route 
@@ -48,6 +68,15 @@ const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
           component={AddCard}
         />
       </Switch>   
+
+      <ReactModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+      >
+        <h3>Удалить колоду { readedDeck && readedDeck.deckname}?</h3>
+        <button onClick={closeModal}>отмена</button>
+        <button onClick={deleteHandler}>удалить</button>
+      </ReactModal>
     </div>
   );
 };
