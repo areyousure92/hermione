@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 const DeckListItem = ({ deckname, deckId }) => {
   return (
     <li>
-      <div>
-        { deckname + " " }
-        <Link to={`/deck/${deckId}`}>Посмотреть</Link>
-        <Link to={`/learn/${deckId}`}>Учить</Link>
-      </div>
+      <span className="deckname">{ deckname }</span>
+      <Link to={`/deck/${deckId}`} className="open">Посмотреть</Link>
+      <Link to={`/learn/${deckId}`}className="learn">Учить</Link>
     </li>
   );
 }

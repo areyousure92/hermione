@@ -4,8 +4,22 @@ import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import { deleteCardFetch } from '../../../redux/actions/cardActions';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '20px'
+  }
+};
+
 const CardListItem = ({ card, deckId, userId, deleteCard, getCardList }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const shortQ = card.q.slice(0, 50); 
+  const shortA = card.a.slice(0, 50);
 
   const deleteHandler = (e) => {
     e.preventDefault();
@@ -21,12 +35,12 @@ const CardListItem = ({ card, deckId, userId, deleteCard, getCardList }) => {
   }
   
   return (
-    <li>
-      <div>
-        { card.q }
+    <li className="card">
+      <div className="q">
+        { shortQ }
       </div>
-      <div>
-        { card.a }
+      <div className="a">
+        { shortA }
       </div>
       <div>
         <button type="button" onClick={openModal}>Удалить</button>
@@ -34,10 +48,21 @@ const CardListItem = ({ card, deckId, userId, deleteCard, getCardList }) => {
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
+        style={customStyles}
       >
-        <h3>Удалить карту { card.q }?</h3>
-        <button onClick={ closeModal }>Отмена</button>
-        <button onClick={ deleteHandler }>Удалить</button>
+        <div className="modalContainer">
+          <h3 className="modalH3">Удалить карту { shortQ }?</h3>
+          <div className="modalBtnContainer">
+            <button 
+              className="modalButton cancel" 
+              onClick={ closeModal }
+            >Отмена</button>
+            <button 
+              className="modalButton confirm" 
+              onClick={ deleteHandler }
+            >Удалить</button>
+          </div>
+        </div>
       </ReactModal>
     </li>
   );

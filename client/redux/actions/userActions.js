@@ -37,5 +37,6 @@ function signupFetch(userData) {
 }
 
 export {
+  signup,
   signupFetch,
 };

@@ -1,11 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { signoutFetch } from '../../redux/actions/authActions';
 
-const Username = ({ username }) => {
+const Username = ({ username, signout }) => {
+  const signoutHandler = (e) => {
+    e.preventDefault();
+    signout();
+  };
+
   return (
-    <div>
-      { username }
+    <div className="username">
+      <span>{ username }</span>
+      { username && <input type="button" value="Выйти" onClick={ signoutHandler } /> }
     </div>
   );
 }
@@ -18,5 +25,9 @@ const mapStateToProps = (state) => ({
   username: state.auth.username,
 });
 
-export default connect(mapStateToProps)(Username);
+const mapDispatchToProps = (dispatch) => ({
+  signout: () => dispatch(signoutFetch()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Username);
 

@@ -15,8 +15,20 @@ import {
   deleteDeckFetch, 
   readDeckFetch,
 } from '../../redux/actions/deckActions';
+import './Deck.css';
 
 ReactModal.setAppElement('#root');
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
   const history = useHistory();
@@ -45,18 +57,16 @@ const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
   }
 
   return (
-    <div>
+    <div className="deck">
       <h2>{ readedDeck && readedDeck.deckname }</h2>
-
-      <Link to="/">На главную</Link>
-      <br />
-      <Link to={`/deck/${deckId}/cardlist`}>Посмотреть список карт</Link>
-      <br />
-      <Link to={`/deck/${deckId}/addcard`}>Добавить карту</Link>
-      <br />
-      <Link to={`/learn/${deckId}`}>Учить эту колоду</Link>
-      <br />
-      <button onClick={openModal}>Удалить эту колоду</button>
+      
+      <div className="nav">
+        <Link to="/">На главную</Link>
+        <Link to={`/deck/${deckId}/cardlist`}>Список карт</Link>
+        <Link to={`/deck/${deckId}/addcard`}>Добавить карту</Link>
+        <button onClick={openModal}>Удалить эту колоду</button>
+        <Link to={`/learn/${deckId}`}>Учить эту колоду</Link>
+      </div>
 
       <Switch>
         <Route 
@@ -72,10 +82,21 @@ const Deck = ({ deleteDeck, userId, readDeck, readedDeck }) => {
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
+        style={customStyles}
       >
-        <h3>Удалить колоду { readedDeck && readedDeck.deckname}?</h3>
-        <button onClick={closeModal}>отмена</button>
-        <button onClick={deleteHandler}>удалить</button>
+        <div className="modalContainer">
+          <h3>Удалить колоду { readedDeck && readedDeck.deckname}?</h3>
+          <div className="modalBtnContainer">
+            <button 
+              className="modalButton cancel" 
+              onClick={closeModal}
+            >Отмена</button>
+            <button 
+              className="modalButton confirm" 
+              onClick={deleteHandler}
+            >Удалить</button>
+          </div>
+        </div>
       </ReactModal>
     </div>
   );

@@ -19,15 +19,15 @@ const Signin = ({ signin, signinErrorMessage }) => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="signin">
       {
         signinErrorMessage
-          ? <p>{ signinErrorMessage }</p>
+          ? <p className="signin_error_message">{ signinErrorMessage }</p>
           : null
       }
-      <p><input type="text" placeholder="Логин" ref={username} /></p>
-      <p><input type="password" placeholder="Пароль" ref={password} /></p>
-      <p><input type="submit" value="Войти" /></p>
+      <input type="text" placeholder="Логин" ref={username} />
+      <input type="password" placeholder="Пароль" ref={password} />
+      <input type="submit" value="Войти" />
     </form>
   );
 }

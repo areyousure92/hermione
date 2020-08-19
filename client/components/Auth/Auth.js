@@ -9,6 +9,7 @@ import {
   showSigninForm,
   showSignupForm,
 } from '../../redux/actions/authActions';
+import './Auth.css';
 
 const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
   const showSignupHandler = (e) => {
@@ -23,7 +24,7 @@ const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
   let form;
   if (showSigninForm) {
     form = <>
-      <h2>Войти</h2>
+      <h3>Войти</h3>
       <Signin />
       <button type="button" onClick={showSignupHandler}>
         Создать новый аккаунт
@@ -31,7 +32,7 @@ const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
     </>
   } else {
     form = <>
-      <h2>Зарегистрироваться</h2>
+      <h3>Зарегистрироваться</h3>
       <Signup />
       <button type="button" onClick={showSigninHandler}>
         Уже есть аккаунт?
@@ -40,7 +41,7 @@ const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
   }
 
   return (
-    <div>
+    <div className="auth">
       {
         isSignedIn && auth.isAuthenticated()
           ? <Redirect to="/" />

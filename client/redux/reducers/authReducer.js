@@ -29,7 +29,13 @@ const authReducer = (state = initialState, action) => {
       return { ...state, signinErrorMessage: action.payload };
 
     case SIGNOUT:
-      return { ...state, signoutMessage: action.payload, isSignedIn: false };
+      return { 
+        ...state, 
+        signoutMessage: action.payload, 
+        isSignedIn: false,
+        username: '',
+        userId: '',
+      };
 
     case SHOW_SIGNIN_FORM:
       return { ...state, showSigninForm: true };

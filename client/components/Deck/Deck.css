@@ -1,0 +1,130 @@
+.deck {
+  flex: 0 0 80%;
+
+  display: flex;
+  flex-flow: column;
+}
+@media (max-width: 767px) {
+  .deck {
+    flex: 0 0 95%;
+  }
+}
+.deck a {
+  text-decoration: none;
+}
+.deck .nav {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+.nav {
+  flex: 1 1 20%;
+  color: #304050;
+}
+.nav a {
+  padding: 5px;
+  color: #304050;
+}
+.nav a:hover {
+  color: #ff5500;
+  text-decoration: underline;
+}
+.nav button {
+  background: none;
+  font-size: 1em;
+}
+.nav button:hover {
+  color: #ff5555;
+  text-decoration: underline;
+}
+
+.cardlist {
+  flex: 0 1 400px;
+  overflow-y: auto;
+}
+.cardlist ul {
+  display: flex;
+  flex-flow: column;
+}
+.cardlist ul li {
+  flex: 0 0 auto;
+  border-left: 10px solid #ff5555;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  background-color: #eee;
+  box-shadow: 2px -2px 5px 0 rgba(0, 0, 0, .1),
+    -2px -2px 5px 0 rgba(0, 0, 0, .1),
+    2px 2px 5px 0 rgba(0, 0, 0, .1),
+    -2px 2px 5px 0 rgba(0, 0, 0, .1);
+}
+.cardlist .card .q,
+.cardlist .card .a {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #aaa;
+}
+.cardlist ul li button {
+  padding: 5px;
+  background-color: #ff5500;
+  color: white;
+  cursor: pointer;
+}
+.cardlist ul li button:hover {
+  background-color: #304050;
+}
+
+/* addcard */
+.deck form {
+  font-size: 1em;
+
+  display: flex;
+  flex-flow: column;
+}
+.deck textarea {
+  flex: 1 0 100px;
+  
+  outline: none;
+  resize: none;
+  overflow: auto;
+  border: 1px solid #304050;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+.deck input {
+  align-self: flex-end;
+
+  padding: 5px;
+  cursor: pointer;
+  background-color: #40b855;
+  color: #fff;
+}
+/* addcard end */
+
+/* modal */
+.modalH3 {
+  color: #304050;
+}
+.modalContainer {
+  display: flex;
+  flex-flow: column;
+}
+.modalBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.modalButton {
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+.modalButton.cancel {
+  background-color: #40b855;
+}
+.modalButton.confirm {
+  background-color: #ff5555;
+}
+/* modal end */
+

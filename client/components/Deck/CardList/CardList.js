@@ -26,9 +26,11 @@ const CardList = ({ getCardList, cards, userId }) => {
   );
 
   return (
-    <div>
+    <div className="cardlist">
       <p>Список карт:</p>
-      { cardList }
+      <ul>
+        { cardList }
+      </ul>
     </div>
   );
 }

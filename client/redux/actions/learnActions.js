@@ -2,10 +2,6 @@ import {
   GET_CARDS_TO_LEARN,
   SHOW_CARD_ANSWER,
   HIDE_CARD_ANSWER,
-  UPDATE_THE_EASY_CARD,
-  UPDATE_THE_NORMAL_CARD,
-  UPDATE_THE_DIFFICULT_CARD,
-  UPDATE_THE_FORGOTTEN_CARD,
 } from '../actionTypes';
 
 function getCardsToLearn(cards) {
@@ -20,22 +16,6 @@ function getCardsToLearn(cards) {
     type: GET_CARDS_TO_LEARN,
     payload: cardsToLearn,
   };
-}
-
-function updateTheEasyCard(card) {
-  
-}
-
-function updateTheNormalCard(card) {
-  
-}
-
-function updateTheDifficultCard(card) {
-  
-}
-
-function updateTheForgottenCard(card) {
-  
 }
 
 function showCardAnswer() {

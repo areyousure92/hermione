@@ -25,10 +25,10 @@ const Signup = ({ signup, signupErrorMessage, signupMessage }) => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="signup">
       {
         signupErrorMessage
-          ? <p>{ signupErrorMessage }</p>
+          ? <p className="signup_error_message">{ signupErrorMessage }</p>
           : null
       }
       {
@@ -36,28 +36,22 @@ const Signup = ({ signup, signupErrorMessage, signupMessage }) => {
           ? <p>{ signupMessage }</p>
           : null
       }
-      <p>
         <input 
           type="text" 
           placeholder="Логин" 
           ref={ username } 
         />
-      </p>
-      <p>
         <input 
           type="password" 
           placeholder="Пароль" 
           ref={ password } 
         />
-      </p>
-      <p>
         <input 
           type="password" 
           placeholder="Пароль еще раз" 
           ref={ passwordConfirm } 
         />
-      </p>
-      <p><input type="submit" value="Зарегистрироваться" /></p>
+      <input type="submit" value="Зарегистрироваться" />
     </form>
   );
 }

@@ -10,8 +10,9 @@ import Learn from './components/Learn/Learn';
 
 const MainRouter = () => {
   return (
-    <div>
+    <>
       <Header />
+      <div className="main">
       <Switch>
         <PrivateRoute component={Home} path="/" exact />
         <Route path="/auth" component={Auth} exact />
@@ -19,7 +20,8 @@ const MainRouter = () => {
         <PrivateRoute component={Learn} path="/learn/:deckId" />
         <Route component={Error404} />
       </Switch>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -24,9 +24,9 @@ const DeckList = ({ decks, getDeckList, userId }) => {
   );
 
   return (
-    <div>
+    <div className="decklist">
       <CreateDeck getDeckList={getDeckList} userId={userId} />
-      <p>Список колод</p>
+      <p>Список колод:</p>
       <ul>
         { deckList }
       </ul>

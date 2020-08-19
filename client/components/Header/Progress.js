@@ -2,7 +2,9 @@ import React from 'react';
 
 const Progress = () => {
   return (
-    <div></div>
+    <div className="progress">
+      <div></div>
+    </div>
   );
 }
 

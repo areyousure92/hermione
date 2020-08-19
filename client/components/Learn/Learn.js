@@ -12,7 +12,7 @@ import {
   showCardAnswer,
   hideCardAnswer,
 } from '../../redux/actions/learnActions';
-
+import './Learn.css';
 
 const Learn = ({ 
   userId, updateCard, 
@@ -35,6 +35,7 @@ const Learn = ({
         });
     };
     fetchCardList(userId, deckId);
+    hideCardAnswer();
   }, [userId, deckId]);
 
   let currentCardToLearn;
@@ -91,26 +92,30 @@ const Learn = ({
   };
 
   return (
-    <div>
-      Learn
+    <div className="learn">
       {
         currentCardToLearn
-        ? <div>
-            <div>question: { currentCardToLearn.q }</div>   
+          ? <><div className="learnCard">
+            <div className="learnCard__q">
+              { currentCardToLearn.q }
+            </div>   
             { showAnswer
-                ? <><div>answer: { currentCardToLearn.a}</div>
-                  <div>
+                && <div className="learnCard__a">{ currentCardToLearn.a}</div>
+            }
+          </div>
+          <div className="learn__btn_container">
+            { showAnswer 
+                ? <>
                     <button name="easy" onClick={clickHandler}>Легко</button>    
                     <button name="hard" onClick={clickHandler}>Тяжело</button>
                     <button name="normal" onClick={clickHandler}>В самый раз</button>
                     <button name="forgotten" onClick={clickHandler}>Не помню</button>
-                    </div></>
-                : <div>
-                    <button onClick={showCardAnswerHandler}>Показать ответ</button>
-                  </div>
+                  </>
+                : 
+                  <button onClick={showCardAnswerHandler}>Показать ответ</button>
             }
-          </div>
-        : null
+            </div></>
+        : <p>На сегодня карт нет</p>
       }
     </div>
   );

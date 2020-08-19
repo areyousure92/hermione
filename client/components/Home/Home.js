@@ -1,12 +1,10 @@
 import React from 'react';
 import DeckList from './DeckList/DeckList';
+import './Home.css';
 
 const Home = () => {
   return (
-    <div>
-      <h2>Home</h2>
-      <DeckList /> 
-    </div>
+    <DeckList /> 
   );
 }
 

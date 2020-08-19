@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Logo from './Logo';
 import Progress from './Progress';
 import Username from './Username';
+import './Header.css';
 
 const Header = () => {
   return (
-    <div>
+    <div className="header">
       <Logo />
       <Progress />
       <Username />

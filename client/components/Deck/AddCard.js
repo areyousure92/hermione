@@ -24,11 +24,8 @@ const AddCard = ({ createCard, userId }) => {
   return (
     <form onSubmit={submitHandler}>
       <p>Добавить карту</p>
-      <br />
       <textarea placeholder="Вопрос" ref={question}></textarea>
-      <br />
       <textarea placeholder="Ответ" ref={answer}></textarea>
-      <br />
       <input type="submit" value="Сохранить" />
     </form>
   );
