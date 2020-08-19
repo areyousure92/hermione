@@ -26,7 +26,7 @@ function getCardListError(errorMessage) {
 
 function getCardListFetch(userId, deckId) {
   return (dispatch) => fetch(
-    `http://localhost:3000/api/cards/${userId}/${deckId}`,
+    `/api/cards/${userId}/${deckId}`,
     {
       method: 'GET',
       headers: {
@@ -61,7 +61,7 @@ function createCardError(errorMessage) {
 
 function createCardFetch(userId, deckId, cardData) {
   return (dispatch) => fetch(
-    `http://localhost:3000/api/cards/${userId}/${deckId}`, {
+    `/api/cards/${userId}/${deckId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function updateCardError(errorMessage) {
 
 function updateCardFetch(userId, deckId, cardId, cardData) {
   return (dispatch) => fetch(
-    `http://localhost:3000/api/cards/${userId}/${deckId}/${cardId}`, 
+    `/api/cards/${userId}/${deckId}/${cardId}`, 
     {
       method: 'PUT',
       headers: {
@@ -136,7 +136,7 @@ function deleteCardError(errorMessage) {
 
 function deleteCardFetch(userId, deckId, cardId) {
   return (dispatch) => fetch(
-    `http://localhost:3000/api/cards/${userId}/${deckId}/${cardId}`,
+    `/api/cards/${userId}/${deckId}/${cardId}`,
     {
       method: 'DELETE',
       headers: {

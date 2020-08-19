@@ -33,7 +33,7 @@ function signinError(errorMessage) {
 }
 
 function signinFetch(userData) {
-  return (dispatch) => fetch('http://localhost:3000/auth/signin', {
+  return (dispatch) => fetch('/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function signout(signoutMessage) {
 }
 
 function signoutFetch() {
-  return (dispatch) => fetch('http://localhost:3000/auth/signout', {
+  return (dispatch) => fetch('/auth/signout', {
     method: 'GET',
   })
     .then(resp => resp.json())

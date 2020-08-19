@@ -24,7 +24,7 @@ function getDeckListError(errorMessage) {
 }
 
 function getDeckListFetch(userId) {
-  return (dispatch) => fetch(`http://localhost:3000/api/decks/${userId}`, {
+  return (dispatch) => fetch(`/api/decks/${userId}`, {
     method: 'GET',
     headers: {
       'Authorization': 'Bearer ' + auth.isAuthenticated(),
@@ -55,7 +55,7 @@ function createDeckError(errorMessage) {
 }
 
 function createDeckFetch(deckData, userId) {
-  return (dispatch) => fetch(`http://localhost:3000/api/decks/${userId}`, {
+  return (dispatch) => fetch(`/api/decks/${userId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ function deleteDeckError(errorMessage) {
 }
 
 function deleteDeckFetch(userId, deckId) {
-  return (dispatch) => fetch(`http://localhost:3000/api/decks/${userId}/${deckId}`, {
+  return (dispatch) => fetch(`/api/decks/${userId}/${deckId}`, {
     method: 'DELETE',
     headers: {
       'Authorization': 'Bearer ' + auth.isAuthenticated(),
@@ -114,7 +114,7 @@ function readDeck(deck) {
 
 function readDeckFetch(userId, deckId) {
   return (dispatch) => 
-    fetch(`http://localhost:3000/api/decks/${userId}/${deckId}`,
+    fetch(`/api/decks/${userId}/${deckId}`,
       {
         method: 'GET',
         headers: {
@@ -134,5 +134,4 @@ export {
   deleteDeckFetch,
   readDeckFetch,
 };
-
 

@@ -18,7 +18,7 @@ function signupError(errorMessage) {
 }
 
 function signupFetch(userData) {
-  return (dispatch) => fetch('http://localhost:3000/api/users', {
+  return (dispatch) => fetch('/api/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
