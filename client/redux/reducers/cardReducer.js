@@ -7,12 +7,15 @@ import {
   UPDATE_CARD_ERROR,
   DELETE_CARD,
   DELETE_CARD_ERROR,
+  READ_CARD,
+  READ_CARD_ERROR,
 } from '../actionTypes';
 
 const initialState = {
   cards: [],
   updatedCard: {},
   updateCardErrorMessage: '',
+  readedCard: null,
 };
 // cosnt initialState = {
 //   cards: [
@@ -48,7 +51,13 @@ const cardReducer = (state = initialState, action) => {
 
     case DELETE_CARD_ERROR:
       return { ...state, deleteCardErrorMessage: action.payload };
-      
+
+    case READ_CARD:
+      return { ...state, readedCard: action.payload };
+
+    case READ_CARD_ERROR:
+      return { ...state, readCardErrorMessage: action.payload };
+    
     default:
       return state;
   }

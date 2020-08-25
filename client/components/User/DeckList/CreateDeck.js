@@ -21,13 +21,14 @@ const CreateDeck = ({ createDeck, userId, getDeckList }) => {
   }
 
   return (
-    <form onSubmit={submitHandler} className="createDeck">
+    <form onSubmit={submitHandler} className="decklist__create-deck">
       <input 
+        className="create-deck__text"
         type="text" 
         placeholder="Новая колода" 
         ref={deckname}
       />
-      <input type="submit" value="Создать" />
+      <input type="submit" className="create-deck__btn" value="Создать" />
     </form>    
   );
 }

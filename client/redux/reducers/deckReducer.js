@@ -6,6 +6,8 @@ import {
   DELETE_DECK,
   DELETE_DECK_ERROR,
   READ_DECK,
+  UPDATE_DECK,
+  UPDATE_DECK_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -35,6 +37,12 @@ const deckReducer = (state = initialState, action) => {
 
     case READ_DECK: 
       return { ...state, readedDeck: action.payload };
+
+    case UPDATE_DECK:
+      return { ...state, updatedDeck: action.payload };
+
+    case UPDATE_DECK_ERROR: 
+      return { ...state, updateDeckErrorMessage: action.payload };
 
     default:
       return state;

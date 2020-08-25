@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { signoutFetch } from '../../redux/actions/authActions';
 
 const Username = ({ username, signout }) => {
@@ -10,8 +11,8 @@ const Username = ({ username, signout }) => {
   };
 
   return (
-    <div className="username">
-      <span>{ username }</span>
+    <div className="header__username">
+      <span><Link to={`/${username}`}>{ username }</Link></span>
       { username && <input type="button" value="Выйти" onClick={ signoutHandler } /> }
     </div>
   );

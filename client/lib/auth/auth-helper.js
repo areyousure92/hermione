@@ -33,6 +33,12 @@ const auth = {
     document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   },
 
+  setUsername(username) {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('username', JSON.stringify(username));
+    }
+  },
+
   getUsername() {
     if (typeof window === 'undefined') { return ''; }
     if (sessionStorage.getItem('jwt')) {

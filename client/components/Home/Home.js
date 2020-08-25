@@ -1,12 +1,21 @@
 import React from 'react';
-import DeckList from './DeckList/DeckList';
-import './Home.css';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Home = () => {
+const Home = ({ username }) => {
   return (
-    <DeckList /> 
-  );
+    <Redirect to={`/${username}`} /> 
+  ); 
 }
 
-export default Home;
+Home.propTypes = {
+  username: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  username: state.auth.username,
+});
+
+export default connect(mapStateToProps)(Home);
 

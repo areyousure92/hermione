@@ -19,14 +19,27 @@ const AddCard = ({ createCard, userId }) => {
     createCard(userId, deckId, cardData);
     question.current.value = '';
     answer.current.value = '';
-  }
+  };
 
   return (
-    <form onSubmit={submitHandler}>
-      <p>Добавить карту</p>
-      <textarea placeholder="Вопрос" ref={question}></textarea>
-      <textarea placeholder="Ответ" ref={answer}></textarea>
-      <input type="submit" value="Сохранить" />
+    <form className="addcard-form" onSubmit={submitHandler}>
+      <p className="addcard-form__title">Добавить карту</p>
+      <div className="addcard-form__container">
+        <textarea 
+          className="addcard-form__q" 
+          placeholder="Вопрос" 
+          ref={question}
+        ></textarea>
+        <textarea 
+          className="addcard-form__a" 
+          placeholder="Ответ" 
+          ref={answer}
+        ></textarea>
+      </div>
+      <div className="addcard-form__btns">
+        <input type="reset" value="Очистить" />
+        <input type="submit" value="Сохранить" />
+      </div>
     </form>
   );
 };

@@ -22,7 +22,8 @@ const signin = async (req, res) => {
       token,
       user: {
         _id: user._id,
-        username: user.username
+        username: user.username,
+        created: user.created,
       }
     });
   } catch (err) {

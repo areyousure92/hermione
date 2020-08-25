@@ -2,7 +2,10 @@ import {
   GET_CARDS_TO_LEARN,
   SHOW_CARD_ANSWER,
   HIDE_CARD_ANSWER,
+  GET_DECK_TO_LEARN,
+  GET_DECK_TO_LEARN_ERROR,
 } from '../actionTypes';
+import auth from '../../lib/auth/auth-helper';
 
 function getCardsToLearn(cards) {
   const cardsToLearn = cards.filter((card) => {
@@ -30,9 +33,47 @@ function hideCardAnswer() {
   };
 }
 
+function getDeckToLearn(readedDeck) {
+  return {
+    type: GET_DECK_TO_LEARN,
+    payload: readedDeck,
+  };
+}
+
+function getDeckToLearnError(errorMessage) {
+  return {
+    type: GET_DECK_TO_LEARN_ERROR,
+    payload: errorMessage,
+  };
+}
+
+function getDeckToLearnFetch(userId, deckId) {
+  return (dispatch) => 
+    fetch(`/api/decks/${userId}/${deckId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.isAuthenticated(),
+        },
+      },
+    )
+      .then((resp) => resp.json()) 
+      .then((data) => {
+        if (data.error) {
+          dispatch(getDeckToLearnError(data.error));
+        } else {
+          dispatch(getDeckToLearn(data));
+        }
+      });
+
+}
+
 export {
   getCardsToLearn,
   showCardAnswer,
   hideCardAnswer,
+  getDeckToLearnFetch,
 };
 

@@ -42,10 +42,9 @@ const Auth = ({ isSignedIn, showSigninForm, showSignin, showSignup }) => {
 
   return (
     <div className="auth">
-      {
+      { /*
         isSignedIn && auth.isAuthenticated()
-          ? <Redirect to="/" />
-          : null
+          && <Redirect to="/" />  */
       }
       { form }
     </div>

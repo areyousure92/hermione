@@ -8,6 +8,8 @@ import {
   UPDATE_CARD_ERROR,
   DELETE_CARD,
   DELETE_CARD_ERROR,
+  READ_CARD,
+  READ_CARD_ERROR,
 } from '../actionTypes';
 
 function getCardList(cards) {
@@ -155,10 +157,45 @@ function deleteCardFetch(userId, deckId, cardId) {
       });
 }
 
+function readCard(card) {
+  return {
+    type: READ_CARD,
+    payload: card,
+  };
+}
+
+function readCardError(errorMessage) {
+  return {
+    type: READ_CARD_ERROR,
+    payload: errorMessage,
+  };
+}
+
+function readCardFetch(userId, deckId, cardId) {
+  return (dispatch) => fetch(`/api/cards/${userId}/${deckId}/${cardId}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + auth.isAuthenticated(),
+      }
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.error) {
+          dispatch(readCardError(data.error));
+        } else {
+          dispatch(readCard(data));
+        }
+      })
+}
+
 export {
   getCardListFetch,
   createCardFetch,
   updateCardFetch,
   deleteCardFetch,
+  readCardFetch,
 };
 

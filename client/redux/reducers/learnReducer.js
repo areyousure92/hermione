@@ -2,9 +2,12 @@ import {
   GET_CARDS_TO_LEARN,
   SHOW_CARD_ANSWER,
   HIDE_CARD_ANSWER,
+  GET_DECK_TO_LEARN,
+  GET_DECK_TO_LEARN_ERROR,
 } from '../actionTypes';
 
 const initialState = {
+  deckToLearn: null,
   cardsToLearn: [],
   showCardAnswer: false,
   currentCard: null,
@@ -20,6 +23,12 @@ const learnReducer = (state = initialState, action) => {
     
     case HIDE_CARD_ANSWER:
       return { ...state, showCardAnswer: false };
+
+    case GET_DECK_TO_LEARN:
+      return { ...state, deckToLearn: action.payload };
+
+    case GET_DECK_TO_LEARN_ERROR: 
+      return { ...state, getDeckToLearnErrorMessage: action.payload };
 
     default:
       return state;

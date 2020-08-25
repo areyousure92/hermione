@@ -50,14 +50,14 @@ const read = (req, res) => {
 };
 
 const update = async (req, res) => {
+  let user = req.profile;
+  user = extend(user, req.body);
   try {
-    let user = req.profile;
-    user = extend(user, req.body);
     // user.updated = Date.now();
     await user.save();
     user.hashed_password = undefined;
     user.salt = undefined;
-    res.json(user);
+    return res.json(user);
   } catch (err) {
     return res.status(400).json({
       error: dbErrorHandler.getErrorMessage(err)

@@ -7,6 +7,8 @@ import {
   DELETE_DECK,
   DELETE_DECK_ERROR,
   READ_DECK,
+  UPDATE_DECK,
+  UPDATE_DECK_ERROR,
 } from '../actionTypes';
 
 function getDeckList(decks) {
@@ -128,10 +130,46 @@ function readDeckFetch(userId, deckId) {
       });
 }
 
+function updateDeck(updatedDeck) {
+  return {
+    type: UPDATE_DECK,
+    payload: updatedDeck,
+  };
+}
+
+function updateDeckError(errorMessage) {
+  return {
+    type: UPDATE_DECK_ERROR,
+    payload: errorMessage,
+  };
+}
+
+function updateDeckFetch(userId, deckId, deckData) {
+  return (dispatch) => 
+    fetch(`/api/decks/${userId}/${deckId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + auth.isAuthenticated(),
+      },
+      body: JSON.stringify(deckData),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.error) {
+          dispatch(updateDeckError(data.error));
+        } else {
+          dispatch(updateDeck(data));
+        }
+      });
+}
+
 export {
   getDeckListFetch,
   createDeckFetch,
   deleteDeckFetch,
   readDeckFetch,
+  updateDeckFetch
 };
 

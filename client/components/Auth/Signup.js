@@ -28,13 +28,11 @@ const Signup = ({ signup, signupErrorMessage, signupMessage }) => {
     <form onSubmit={submitHandler} className="signup">
       {
         signupErrorMessage
-          ? <p className="signup_error_message">{ signupErrorMessage }</p>
-          : null
+          && <p className="signup_error_message">{ signupErrorMessage }</p>
       }
       {
         signupMessage
-          ? <p>{ signupMessage }</p>
-          : null
+          && <p className="signup_message">{ signupMessage }</p>
       }
         <input 
           type="text" 

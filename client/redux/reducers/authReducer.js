@@ -5,11 +5,13 @@ import {
   SIGNIN_ERROR,
   SHOW_SIGNIN_FORM,
   SHOW_SIGNUP_FORM,
+  UPDATE_USER,
 } from '../actionTypes';
 
 const initialState = {
   username: auth.getUsername(),
   userId: auth.getUserId(),
+  userCreated: '',
   isSignedIn: Boolean(auth.isAuthenticated()),
   signinErrorMessage: '',
   showSigninForm: true,
@@ -22,7 +24,8 @@ const authReducer = (state = initialState, action) => {
         ...state, 
         isSignedIn: true,
         username: action.payload.username, 
-        userId: action.payload._id 
+        userId: action.payload._id,
+        userCreated: action.payload.created,
       };
 
     case SIGNIN_ERROR:
@@ -42,6 +45,9 @@ const authReducer = (state = initialState, action) => {
 
     case SHOW_SIGNUP_FORM:
       return { ...state, showSigninForm: false };
+
+    case UPDATE_USER:
+      return { ...state, username: action.payload.username };
 
     default:
       return state;
