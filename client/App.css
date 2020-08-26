@@ -109,6 +109,11 @@ button {
   display: flex;
   flex-flow: column;
 }
+@media (max-width: 425px) {
+  .main .container {
+    width: 95%;
+  }
+}
 
 .main__header {
   flex: 0 0 10%;
