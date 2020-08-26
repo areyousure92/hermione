@@ -220,7 +220,20 @@ button {
 }
 .decklist__item .item__container .cards-number {
   flex: 0 0 60%;
+  display: flex;
 }
+.item__container .cards-number .allcards,
+.item__container .cards-number .todays-cards {
+  flex: 0 1 50px;
+  text-align: center;
+}
+.item__container .cards-number .allcards {
+  color: #304050;
+}
+.item__container .cards-number .todays-cards {
+  color: rgba(200, 50, 50, .8);
+}
+
 .decklist__item .learn {
   flex: 0 0 80px;
 
@@ -310,7 +323,7 @@ button {
 .cardlist__item .a {
   flex: 1 0 50%;
 
-  background-color: rgba(200, 50, 50, .3);
+  background-color: rgba(50, 200, 50, .7);
   padding: 5px;
   
   text-overflow: ellipsis;
@@ -327,12 +340,12 @@ button {
 .card-content .card-content__q {
   flex: 1 0 100px;
   padding: 10px;
-  background-color: rgba(200, 50, 50, .7);
+  background-color: rgba(133, 179, 224, .5);
 }
 .card-content .card-content__a {
   flex: 1 0 100px;
   padding: 10px;
-  background-color: rgba(133, 179, 224, .5);
+  background-color: rgba(50, 200, 50, .7);
 }
 
 .main__body .addcard-form {
@@ -400,11 +413,12 @@ button {
   flex: 0 0 50%;
 }
 .learn-card__content .learn-card__q {
-  background-color: rgba(50, 200, 50, .5);
+  background-color: rgba(133, 179, 224, .5);
   padding: 5px;
 }
 .learn-card__content .learn-card__a {
-  background-color: rgba(200, 50, 50, .5);
+  background-color: rgba(50, 200, 50, .5);
+
   padding: 5px;
 }
 .learn-card .learn-card__buttons {

@@ -28,7 +28,10 @@ const CardList = ({ getCardList, cards, userId }) => {
   return (
     <div className="cardlist">
       <ul className="cardlist__container">
-        { cardList }
+        { cardList.length
+            ? cardList
+            : <p>Колода пуста</p>
+        }
       </ul>
     </div>
   );

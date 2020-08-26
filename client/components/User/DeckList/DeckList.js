@@ -20,6 +20,8 @@ const DeckList = ({ decks, getDeckList, userId }) => {
       deckId={deck._id}
       userId={userId}
       getDeckList={getDeckList}
+      allCardsNumber={deck.allCardsNumber}
+      todaysCardsNumber={deck.todaysCardsNumber}
     />
   );
 

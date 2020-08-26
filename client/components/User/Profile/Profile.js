@@ -5,12 +5,14 @@ import { Link, useHistory } from 'react-router-dom';
 import { deleteUserFetch } from '../../../redux/actions/userActions';
 import { signoutFetch } from '../../../redux/actions/authActions';
 import DeleteModal from '../../ui/DeleteModal/DeleteModal';
+import { dateToString } from '../../../lib/date/date-helper';
 
 
 const Profile = ({ 
   created, username, userId, deleteUser, signout,
 }) => {
   const history = useHistory();
+  const createdDateString = dateToString(created);
 
   const deleteUserHandler = (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const Profile = ({
 
   return (
     <div className="account info">
-      <p>Дата регистрации: { created }</p>
+      <p>Дата регистрации: { createdDateString }</p>
       <div className="info__container">
         <Link 
           className="info__edit" 

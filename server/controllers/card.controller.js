@@ -5,8 +5,11 @@ import Card from '../models/card.model';
 const create = async (req, res) => {
   const card = new Card(req.body);
   card.deck = req.deck;
+  let deck = req.deck;
+  deck.allCardsNumber++;
   try {
     await card.save();
+    await deck.save();
     return res.status(200).json({
       message: 'Карта успешно сохранена.',
     });
@@ -36,7 +39,7 @@ const cardByID = async (req, res, next, id) => {
 
 const getCardList = async (req, res) => {
   try {
-    let cards = await Card.find({deck: req.deck._id}).select('q a interval lastdate nextdate');
+    let cards = await Card.find({deck: req.deck._id}).select('q a interval lastdate nextdate repeated');
     return res.json(cards);
   } catch (err) {
     return res.status(400).json({
@@ -64,8 +67,11 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   const card = req.card;
+  const deck = req.deck;
   try {
     let deletedCard = await card.remove();
+    deck.allCardsNumber--;
+    await deck.save();
     return res.json(deletedCard);
   } catch (err) {
     return res.status(400).json({

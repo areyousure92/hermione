@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { deleteCardFetch } from '../../redux/actions/cardActions';
 import DeleteModal from '../ui/DeleteModal/DeleteModal';
+import { dateToString } from '../../lib/date/date-helper';
 
 const CardSettings = ({ readedCard, deleteCard, userId }) => {
   const history = useHistory();
@@ -20,8 +21,8 @@ const CardSettings = ({ readedCard, deleteCard, userId }) => {
 
   return (
     <div className="info">
-      <div>Карта создана: { readedCard.created }</div>
-      <div>Следующая дата: { readedCard.nextdate }</div>    
+      <div>Карта создана: { dateToString(readedCard.created) }</div>
+      <div>Следующая дата: { dateToString(readedCard.nextdate) }</div>    
       <div className="info__container">
         <button className="info__delete" onClick={openModal}>Удалить</button>
         <Link 

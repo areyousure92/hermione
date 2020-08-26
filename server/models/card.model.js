@@ -26,6 +26,10 @@ const CardSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  repeated: {
+    type: Number,
+    default: 0,
+  },
 });
 
 export default mongoose.model('Card', CardSchema);

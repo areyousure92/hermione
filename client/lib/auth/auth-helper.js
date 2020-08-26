@@ -9,11 +9,12 @@ const auth = {
     return false;
   },
 
-  authenticate(jwt, userId, username) {
+  authenticate(jwt, userId, username, userCreated) {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('jwt', JSON.stringify(jwt));
       sessionStorage.setItem('_id', JSON.stringify(userId));
       sessionStorage.setItem('username', JSON.stringify(username));
+      sessionStorage.setItem('userCreated', JSON.stringify(userCreated));
     }
   },
 
@@ -50,6 +51,13 @@ const auth = {
     if (typeof window === 'undefined') { return ''; }
     if (sessionStorage.getItem('jwt')) {
       return JSON.parse(sessionStorage.getItem('_id'));
+    }
+    return '';
+  },
+  getUserCreated() {
+    if (typeof window === 'undefined') { return ''; }
+    if (sessionStorage.getItem('userCreated')) {
+      return JSON.parse(sessionStorage.getItem('userCreated'));
     }
     return '';
   }

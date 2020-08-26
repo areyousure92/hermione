@@ -11,7 +11,7 @@ import {
 const initialState = {
   username: auth.getUsername(),
   userId: auth.getUserId(),
-  userCreated: '',
+  userCreated: auth.getUserCreated(),
   isSignedIn: Boolean(auth.isAuthenticated()),
   signinErrorMessage: '',
   showSigninForm: true,

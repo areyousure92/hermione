@@ -31,7 +31,9 @@ const LearnCard = ({
   
   const clickHandler = (e) => {
     e.preventDefault();
-    let cardNextDate = currentCardToLearn.nextdate;
+    let cardRepeated = currentCardToLearn.repeated;
+    //let cardNextDate = currentCardToLearn.nextdate;
+    let cardNextDate = new Date();
     let cardNextInterval = currentCardToLearn.interval;
     let newNextDate = currentCardToLearn.nextdate;
 
@@ -78,6 +80,8 @@ const LearnCard = ({
     const cardData = {
       interval: cardNextInterval,
       nextdate: newNextDate, 
+      lastdate: new Date(),
+      repeated: cardRepeated + 1,
     };
 
     updateCard(userId, deckId, currentCardToLearn._id, cardData);

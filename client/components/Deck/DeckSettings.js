@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { useHistory, Link, useRouteMatch, useParams } from 'react-router-dom';
 import { deleteDeckFetch } from '../../redux/actions/deckActions';
 import DeleteModal from '../ui/DeleteModal/DeleteModal';
+import { dateToString } from '../../lib/date/date-helper';
 
 const DeckSettings = ({ readedDeck, deleteDeck, userId, username }) => {
   const { deckId } = useParams();
@@ -23,8 +24,8 @@ const DeckSettings = ({ readedDeck, deleteDeck, userId, username }) => {
 
   return (
     <div className="deck-settings info">
-      <p>Дата создания: { readedDeck && readedDeck.created }</p>
-      <p>Количество карт: </p>
+      <p>Дата создания: { readedDeck && dateToString(readedDeck.created) }</p>
+      <p>Количество карт: { readedDeck && readedDeck.allCardsNumber }</p>
       <Link className="addcard" to={`${match.url}/addcard`}>Добавить карту</Link>
       <div className="info__container">
         <button className="info__delete" onClick={openModal}>Удалить</button>

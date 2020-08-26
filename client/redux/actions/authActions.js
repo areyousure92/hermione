@@ -19,7 +19,9 @@ function showSignupForm() {
 }
 
 function signin(data) {
-  auth.authenticate(data.token, data.user._id, data.user.username);
+  auth.authenticate(
+    data.token, data.user._id, data.user.username, data.user.created
+  );
   return {
     type: SIGNIN,
     payload: data.user,

@@ -1,6 +1,7 @@
 import extend from 'lodash/extend';
 import dbErrorHandler from '../helpers/dbErrorHandler';
 import Deck from '../models/deck.model';
+import Card from '../models/card.model';
 import { deleteDeckCards } from '../helpers/deleteFromDB';
 
 // Deck 
@@ -69,6 +70,14 @@ const remove = async (req, res) => {
 const userDeckList = async (req, res) => {
   try {
     let decks = await Deck.find({owner: req.profile._id}).select('deckname cards');
+    decks = await Promise.all(decks.map(async (deck) => {
+      let cards = await Card.find({deck: deck._id}).select('nextdate')
+      let todaysCards = cards.filter((card) => card.nextdate < new Date());
+      deck.allCardsNumber = cards.length;
+      deck.todaysCardsNumber = todaysCards.length;
+      await deck.save();
+      return deck;
+    }));
     res.json(decks);
   } catch (err) {
     return res.status(400).json({
