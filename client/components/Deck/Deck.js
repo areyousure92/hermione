@@ -32,7 +32,7 @@ const Deck = ({ userId, readDeck, readedDeck }) => {
       <MainHeader>
         <div className="title">{ readedDeck && readedDeck.deckname }</div>
         <div className="nav">
-          <Link to="/">На главную</Link>
+          <Link to={`/${username}/decklist`}>На главную</Link>
           <Link to={`${match.url}`}>Колода</Link>
           <Link to={`${match.url}/cardlist`}>Список карт</Link>
           <Link to={`/${username}/learn/${deckId}`}>Учить</Link>

@@ -20,6 +20,7 @@ const Learn = ({
   hideCardAnswer,
   getDeckToLearn,
   deckToLearn,
+  username,
 }) => {
   const { deckId } = useParams();
 
@@ -40,7 +41,7 @@ const Learn = ({
     <MainHeader>
       <div className="title">{ deckToLearn && deckToLearn.deckname }</div>
       <div className="nav">
-        <Link to={`/`}>На главную</Link>    
+        <Link to={`/${username}/decklist`}>На главную</Link>    
       </div>
     </MainHeader>
     <MainBody>
@@ -56,11 +57,13 @@ Learn.propTypes = {
   getCardsToLearnA: PropTypes.func.isRequired,
   hideCardAnswer: PropTypes.func.isRequired,
   getDeckToLearn: PropTypes.func.isRequired,
+  username: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
   deckToLearn: state.learn.deckToLearn,
+  username: state.auth.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -118,6 +118,9 @@ button {
 }
 .main__header .title {
   flex: 0 0 50%;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
 }
 .main__header .nav {
   flex: 0 0 50%;
@@ -160,14 +163,18 @@ button {
   height: 30px;
 
   display: flex;
-  justify-content: space-between;
 }
 .decklist__create-deck .create-deck__text {
-  flex: 1 1 40px;
+  flex: 1 0 40px;
   padding-left: 5px;
   background-color: rgba(50, 50, 200, .3);
   font-size: 1em;
   color: #304050;
+}
+@media (max-width: 320px) {
+  .decklist__create-deck .create-deck__text {
+    width: 40px;
+  }
 }
 .decklist__create-deck .create-deck__btn {
   flex: 0 0 80px;
@@ -428,6 +435,16 @@ button {
   display: flex;
   align-items: center;
   background-color: rgba(50, 50, 200, .2);
+}
+.edituser .edituser__btns,
+.editdeck-form .editdeck__btns {
+  display: flex;
+}
+@media (max-width: 425px) {
+  .edituser input[type="text"],
+  .editdeck-form input[type="text"] {
+    padding: 5px;
+  }
 }
 .edituser input[type="button"],
 .edituser input[type="submit"],

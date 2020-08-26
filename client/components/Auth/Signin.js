@@ -17,7 +17,7 @@ const Signin = ({ signin, signinErrorMessage }) => {
       password: password.current.value,
     };
     signin(userData)
-      .then(() => history.push("/"));
+      .then(() => history.push(`/${userData.username}/decklist`));
     username.current.value = '';
     password.current.value = '';
   }

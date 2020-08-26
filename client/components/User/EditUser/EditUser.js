@@ -25,8 +25,10 @@ const EditUser = ({ username, updateUser, userId }) => {
   return (
     <form className="edituser" onSubmit={editUserHandler}>
       <input type="text" defaultValue={username} ref={usernameRef} />
-      <input type="button" onClick={cancelEditHandler} value="Отмена" />
-      <input type="submit" value="Сохранить" />
+      <div className="edituser__btns">
+        <input type="button" onClick={cancelEditHandler} value="Отмена" />
+        <input type="submit" value="Сохранить" />
+      </div>
     </form>
   );
 };

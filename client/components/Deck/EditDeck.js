@@ -29,8 +29,10 @@ const EditDeck = ({
   return (
     <form className="editdeck-form" onSubmit={updateDeckSubmitHandler}>
       <input type="text" defaultValue={readedDeck.deckname} ref={deckname} />
-      <input type="button" onClick={cancelClickHandler} value="Отмена" />
-      <input type="submit" value="Обновить" />
+      <div className="editdeck__btns">
+        <input type="button" onClick={cancelClickHandler} value="Отмена" />
+        <input type="submit" value="Обновить" />
+      </div>
     </form>
   );
 };

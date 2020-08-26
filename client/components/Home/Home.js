@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Home = ({ username }) => {
   return (
-    <Redirect to={`/${username}`} /> 
+    <Redirect to={`/${username}/decklist`} /> 
   ); 
 }
 
