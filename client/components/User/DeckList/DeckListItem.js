@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 const DeckListItem = ({ 
-  deckname, deckId, username, allCardsNumber, todaysCardsNumber, 
+  deckname, deckId, username, allCardsNumber, todaysCardsNumber, newCards,
+  repeatedCards,
 }) => {
   const history = useHistory();
 
@@ -19,7 +20,9 @@ const DeckListItem = ({
         <span className="deckname">{ deckname }</span>
         <span className="cards-number">
           <span className="allcards" title="Все карты">{ allCardsNumber }</span>    
+          <span className="new-cards" title="Новые карты">{ newCards }</span>
           <span className="todays-cards" title="На сегодня">{ todaysCardsNumber }</span>
+          <span className="repeated-cards" title="Повторено">{ repeatedCards }</span>
         </span>
       </div>
       <Link to={`/${username}/learn/${deckId}`} className="learn">Учить</Link>
@@ -33,6 +36,8 @@ DeckListItem.propTypes = {
   username: PropTypes.string.isRequired,
   allCardsNumber: PropTypes.number.isRequired,
   todaysCardsNumber: PropTypes.number.isRequired,
+  newCards: PropTypes.number.isRequired,
+  repeatedCards: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({

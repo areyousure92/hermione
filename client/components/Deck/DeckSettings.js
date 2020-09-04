@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory, Link, useRouteMatch, useParams } from 'react-router-dom';
 import { deleteDeckFetch } from '../../redux/actions/deckActions';
+import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 import DeleteModal from '../ui/DeleteModal/DeleteModal';
 import { dateToString } from '../../lib/date/date-helper';
 
-const DeckSettings = ({ readedDeck, deleteDeck, userId, username }) => {
+const DeckSettings = ({ 
+  readedDeck, deleteDeck, userId, username, getUserCardsNumber, 
+}) => {
   const { deckId } = useParams();
   const match = useRouteMatch();
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -19,6 +22,7 @@ const DeckSettings = ({ readedDeck, deleteDeck, userId, username }) => {
     e.preventDefault();
     deleteDeck(userId, deckId)
       .then(closeModal())
+      .then(() => getUserCardsNumber(userID))
       .then(history.push(`/${username}/decklist`))
   };
 
@@ -47,6 +51,7 @@ DeckSettings.propTypes = {
   deleteDeck: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
+  getUserCardsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +62,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteDeck: (userId, deckId) => dispatch(deleteDeckFetch(userId, deckId)),
+  getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckSettings);

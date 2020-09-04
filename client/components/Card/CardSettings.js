@@ -5,8 +5,9 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { deleteCardFetch } from '../../redux/actions/cardActions';
 import DeleteModal from '../ui/DeleteModal/DeleteModal';
 import { dateToString } from '../../lib/date/date-helper';
+import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 
-const CardSettings = ({ readedCard, deleteCard, userId }) => {
+const CardSettings = ({ readedCard, deleteCard, userId, getUserCardsNumber }) => {
   const history = useHistory();
   const { username, deckId, cardId } = useParams();
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -16,6 +17,7 @@ const CardSettings = ({ readedCard, deleteCard, userId }) => {
   const deleteCardHandler = (e) => {
     e.preventDefault();
     deleteCard(userId, deckId, cardId)
+      .then(() => getUserCardsNumber(userId))
       .then(history.push(`/${username}/deck/${deckId}/cardlist`));
   };
 
@@ -45,6 +47,9 @@ const CardSettings = ({ readedCard, deleteCard, userId }) => {
 
 CardSettings.propTypes = {
   readedCard: PropTypes.object,
+  userId: PropTypes.string,
+  deleteCard: PropTypes.func.isRequired,
+  getUserCardsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -55,6 +60,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteCard: (userId, deckId, cardId) => 
     dispatch(deleteCardFetch(userId, deckId, cardId)),
+  getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardSettings);

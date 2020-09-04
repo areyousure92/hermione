@@ -12,6 +12,9 @@ router.route('/api/users/:userId')
   .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
   .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
 
+router.route('/api/users/cardsnumber/:userId')
+  .get(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.cardsNumber);
+
 router.param('userId', userCtrl.userByID);
 
 export default router;

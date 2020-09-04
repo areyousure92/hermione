@@ -5,7 +5,9 @@ import { getDeckListFetch } from '../../../redux/actions/deckActions';
 import CreateDeck from './CreateDeck';
 import DeckListItem from './DeckListItem';
 
-const DeckList = ({ decks, getDeckList, userId }) => {
+const DeckList = ({ 
+  decks, getDeckList, userId,
+}) => {
   useEffect(() => {
     const fetchDeckList = async (userId) => {
       getDeckList(userId);
@@ -20,8 +22,10 @@ const DeckList = ({ decks, getDeckList, userId }) => {
       deckId={deck._id}
       userId={userId}
       getDeckList={getDeckList}
-      allCardsNumber={deck.allCardsNumber}
-      todaysCardsNumber={deck.todaysCardsNumber}
+      allCardsNumber={deck.allCards}
+      todaysCardsNumber={deck.todaysCards}
+      newCards={deck.newCards}
+      repeatedCards={deck.repeatedCards}
     />
   );
 

@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { deleteUserFetch } from '../../../redux/actions/userActions';
 import { signoutFetch } from '../../../redux/actions/authActions';
+import { getUserCardsNumberFetch } from '../../../redux/actions/userActions';
 import DeleteModal from '../../ui/DeleteModal/DeleteModal';
 import { dateToString } from '../../../lib/date/date-helper';
 
 
 const Profile = ({ 
-  created, username, userId, deleteUser, signout,
+  created, username, userId, deleteUser, signout, getUserCardsNumber,
 }) => {
-  const history = useHistory();
   const createdDateString = dateToString(created);
 
   const deleteUserHandler = (e) => {
     e.preventDefault();
     deleteUser(userId)
+      .then(() => getUserCardsNumber(userId))
       .then(() => signout());
   };
+  
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() { setIsOpen(true); }
   function closeModal() { setIsOpen(false); }
@@ -55,6 +57,9 @@ Profile.propTypes = {
   created: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  signout: PropTypes.func.isRequired,
+  getUserCardsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -66,6 +71,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteUser: (userId) => dispatch(deleteUserFetch(userId)),
   signout: () => dispatch(signoutFetch()),
+  getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

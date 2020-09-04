@@ -12,10 +12,11 @@ import {
   getCardListFetch, 
   updateCardFetch 
 } from '../../redux/actions/cardActions';
+import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 
 const LearnCard = ({ 
   cardsToLearn, showAnswer, updateCard, showCardAnswer, userId, 
-  getCardList, getCardsToLearnA, hideCardAnswer,
+  getCardList, getCardsToLearnA, hideCardAnswer, getUserCardsNumber,
 }) => {
   const { deckId } = useParams();
 
@@ -88,7 +89,8 @@ const LearnCard = ({
     getCardList(userId, deckId)
       .then((cards) => { 
         getCardsToLearnA(cards)
-      });
+      })
+      .then(() => getUserCardsNumber(userId));
     hideCardAnswer();
   };
 
@@ -130,6 +132,13 @@ const LearnCard = ({
 LearnCard.propTypes = {
   cardsToLearn: PropTypes.array,
   showAnswer: PropTypes.bool.isRequired,
+  userId: PropTypes.string,
+  getCardsToLearnA: PropTypes.func.isRequired,
+  getCardList: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
+  showCardAnswer: PropTypes.func.isRequired,
+  hideCardAnswer: PropTypes.func.isRequired,
+  getUserCardsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -145,6 +154,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateCardFetch(userId, deckId, cardId, cardData)), 
   showCardAnswer: () => dispatch(showCardAnswer()),
   hideCardAnswer: () => dispatch(hideCardAnswer()),
+  getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnCard);

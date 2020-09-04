@@ -70,14 +70,44 @@ const remove = async (req, res) => {
 const userDeckList = async (req, res) => {
   try {
     let decks = await Deck.find({owner: req.profile._id}).select('deckname cards');
+
+    let now = new Date();
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
     decks = await Promise.all(decks.map(async (deck) => {
-      let cards = await Card.find({deck: deck._id}).select('nextdate')
-      let todaysCards = cards.filter((card) => card.nextdate < new Date());
-      deck.allCardsNumber = cards.length;
-      deck.todaysCardsNumber = todaysCards.length;
+      let allCards = 0;
+      let todaysCards = 0;
+      let repeatedCards = 0;
+      let newCards = 0;
+      
+      let cards = await Card.find({deck: deck._id}).select('lastdate nextdate')
+
+      cards.forEach((card) => {
+        let nextdate = new Date(card.nextdate);
+        let lastdate = new Date(card.lastdate);
+        let nextday = new Date(nextdate.getFullYear(), nextdate.getMonth(), nextdate.getDate());
+        let lastday = new Date(lastdate.getFullYear(), lastdate.getMonth(), lastdate.getDate());
+
+        allCards++;
+        if (nextday.getTime() <= today.getTime()) {
+          todaysCards++;
+        }
+        if (lastday.getTime() == nextday.getTime()) {
+          newCards++;
+        } else if (lastday.getTime() == today.getTime()) {
+          repeatedCards++;
+        }
+      });
+
+      deck.allCards = allCards;
+      deck.todaysCards = todaysCards;
+      deck.repeatedCards = repeatedCards;
+      deck.newCards = newCards;
+
       await deck.save();
       return deck;
     }));
+
     res.json(decks);
   } catch (err) {
     return res.status(400).json({
@@ -85,6 +115,7 @@ const userDeckList = async (req, res) => {
     });
   }
 };
+
 
 
 export default {

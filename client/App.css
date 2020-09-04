@@ -86,6 +86,10 @@ button {
   flex: 0 0 10px;
 
   background-color: rgba(200, 50, 50, .5);
+  display: flex;
+}
+.progress div {
+  height: 100%;
 }
 
 .main {
@@ -228,15 +232,23 @@ button {
   display: flex;
 }
 .item__container .cards-number .allcards,
-.item__container .cards-number .todays-cards {
+.item__container .cards-number .todays-cards,
+.item__container .cards-number .new-cards,
+.item__container .cards-number .repeated-cards {
   flex: 0 1 50px;
   text-align: center;
 }
 .item__container .cards-number .allcards {
-  color: #304050;
+  color: rgba(200, 50, 50, .8);
+}
+.item__container .cards-number .new-cards {
+  color: rgba(50, 50, 200, 0.8);
 }
 .item__container .cards-number .todays-cards {
   color: rgba(200, 50, 50, .8);
+}
+.item__container .cards-number .repeated-cards {
+  color: rgba(50, 100, 50, 1);
 }
 
 .decklist__item .learn {

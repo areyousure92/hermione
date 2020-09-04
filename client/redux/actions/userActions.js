@@ -7,6 +7,8 @@ import {
   DELETE_USER_ERROR,
   READ_USER,
   READ_USER_ERROR,
+  GET_USER_CARDS_NUMBER,
+  GET_USER_CARDS_NUMBER_ERROR,
 } from '../actionTypes';
 import auth from '../../lib/auth/auth-helper';
 
@@ -142,10 +144,42 @@ function readUserFetch(userId) {
     })
 }
 
+function getUserCardsNumber(cardsNumber) {
+  return {
+    type: GET_USER_CARDS_NUMBER,
+    payload: cardsNumber,
+  };
+}
+
+function getUserCardsNumberError(errorMessage) {
+  return {
+    type: GET_USER_CARDS_NUMBER_ERROR,
+    payload: errorMessage,
+  };
+}
+
+function getUserCardsNumberFetch(userId) {
+  return (dispatch) => fetch(`/api/users/cardsnumber/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + auth.isAuthenticated(),
+    }
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data.error) {
+        dispatch(getUserCardsNumberError(data.error));
+      } else {
+        dispatch(getUserCardsNumber(data));
+      }
+    });
+}
+
 export {
   signup,
   signupFetch,
   updateUserFetch,
   deleteUserFetch,
   readUserFetch,
+  getUserCardsNumberFetch,
 };

@@ -10,14 +10,22 @@ const DeckSchema = new mongoose.Schema({
     default: Date.now
   },
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  allCardsNumber: {
+  allCards: {
     type: Number,
     default: 0,
   },
-  todaysCardsNumber: {
+  todaysCards: {
     type: Number,
     default: 0,
   },
+  repeatedCards: {
+    type: Number,
+    default: 0,
+  },
+  newCards: {
+    type: Number,
+    default: 0,
+  }
 });
 
 export default mongoose.model('Deck', DeckSchema);

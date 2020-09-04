@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createCardFetch } from '../../redux/actions/cardActions';
 import { readDeckFetch } from '../../redux/actions/deckActions';
+import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 
-const AddCard = ({ createCard, userId, readDeck, }) => {
+const AddCard = ({ createCard, userId, readDeck, getUserCardsNumber, }) => {
   const question = React.useRef();
   const answer = React.useRef();
 
@@ -18,6 +19,7 @@ const AddCard = ({ createCard, userId, readDeck, }) => {
       a: answer.current.value,
     };
     createCard(userId, deckId, cardData)
+      .then(() => getUserCardsNumber(userId))
       .then(() => readDeck(userId, deckId));
     question.current.value = '';
     answer.current.value = '';
@@ -50,6 +52,7 @@ AddCard.propTypes = {
   createCard: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
   readDeck: PropTypes.func.isRequired,
+  getUserCardsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -60,6 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
   createCard: (userId, deckId, cardData) => 
     dispatch(createCardFetch(userId, deckId, cardData)),
   readDeck: (userId, deckId) => dispatch(readDeckFetch(userId, deckId)),
+  getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard);
