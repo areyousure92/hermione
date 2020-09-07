@@ -13,6 +13,8 @@ import {
   HIDE_CARD_LOADING,
   CLEAR_CARDLIST,
   CLEAR_READED_CARD,
+  SHOW_CARD_SAVING,
+  HIDE_CARD_SAVING,
 } from '../actionTypes';
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
   updateCardErrorMessage: '',
   readedCard: null,
   isCardLoading: true,
+  isCardSaving: false,
 };
 // cosnt initialState = {
 //   cards: [
@@ -74,6 +77,12 @@ const cardReducer = (state = initialState, action) => {
 
     case CLEAR_READED_CARD:
       return { ...state, readedCard: null };
+
+    case SHOW_CARD_SAVING:
+      return { ...state, isCardSaving: true };
+
+    case HIDE_CARD_SAVING:
+      return { ...state, isCardSaving: false };
 
     default:
       return state;

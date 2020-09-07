@@ -3,20 +3,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { createCardFetch } from '../../redux/actions/cardActions';
+import { 
+  createCardFetch, 
+  showCardSaving, 
+  hideCardSaving 
+} from '../../redux/actions/cardActions';
 import { readDeckFetch } from '../../redux/actions/deckActions';
 import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 
-const AddCard = ({ createCard, userId, readDeck, getUserCardsNumber, }) => {
+const AddCard = ({ 
+  createCard, userId, readDeck, getUserCardsNumber, 
+  isCardSaving, showCardSaving, hideCardSaving,
+}) => {
   const { register, handleSubmit, reset, errors } = useForm();
   const onSubmit = (data) => {
+    showCardSaving();
     createCard(userId, deckId, data)
       .then(() => getUserCardsNumber(userId))
-      .then(() => readDeck(userId, deckId));
+      .then(() => readDeck(userId, deckId))
+      .then(() => hideCardSaving());
     reset();
   };
 
   const { deckId } = useParams();
+
+  if (isCardSaving) {
+    return (
+      <div className="addcard-form">Сохранение...</div>
+    );
+  }
 
   return (
     <form className="addcard-form" onSubmit={handleSubmit(onSubmit)}>
@@ -54,10 +69,14 @@ AddCard.propTypes = {
   userId: PropTypes.string.isRequired,
   readDeck: PropTypes.func.isRequired,
   getUserCardsNumber: PropTypes.func.isRequired,
+  isCardSaving: PropTypes.bool.isRequired,
+  showCardSaving: PropTypes.func.isRequired,
+  hideCardSaving: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
+  isCardSaving: state.card.isCardSaving,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -65,6 +84,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createCardFetch(userId, deckId, cardData)),
   readDeck: (userId, deckId) => dispatch(readDeckFetch(userId, deckId)),
   getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
+  showCardSaving: () => dispatch(showCardSaving()),
+  hideCardSaving: () => dispatch(hideCardSaving()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard);

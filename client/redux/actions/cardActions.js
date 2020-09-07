@@ -14,6 +14,8 @@ import {
   HIDE_CARD_LOADING,
   CLEAR_CARDLIST,
   CLEAR_READED_CARD,
+  SHOW_CARD_SAVING,
+  HIDE_CARD_SAVING,
 } from '../actionTypes';
 
 function getCardList(cards) {
@@ -219,6 +221,18 @@ function clearReadedCard() {
   };
 }
 
+function showCardSaving() {
+  return {
+    type: SHOW_CARD_SAVING,
+  };
+}
+
+function hideCardSaving() {
+  return {
+    type: HIDE_CARD_SAVING,
+  };
+}
+
 export {
   getCardListFetch,
   createCardFetch,
@@ -229,5 +243,7 @@ export {
   hideCardLoading,
   clearCardlist,
   clearReadedCard,
+  showCardSaving,
+  hideCardSaving,
 };
 
