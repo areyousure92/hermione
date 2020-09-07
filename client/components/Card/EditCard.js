@@ -2,26 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { updateCardFetch, readCardFetch } from '../../redux/actions/cardActions';
 
 const EditCard = ({ 
   readedCard, updateCard, userId, username, readCard,
 }) => {
-  const question = React.useRef();
-  const answer = React.useRef();
-  const { deckId, cardId } = useParams();
-  const history = useHistory();
-
-  const updateSubmitHandler = (e) => {
-    e.preventDefault();
-    const cardData = {
-      q: question.current.value,
-      a: answer.current.value,
-    };
-    updateCard(userId, deckId, cardId, cardData)
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
+    updateCard(userId, deckId, cardId, data)
       .then(readCard(userId, deckId, cardId))
       .then(history.push(`/${username}/card/${deckId}/${cardId}`));
   };
+
+  const { deckId, cardId } = useParams();
+  const history = useHistory();
 
   const cancelClickHandler = (e) => {
     e.preventDefault();
@@ -29,10 +24,22 @@ const EditCard = ({
   };
 
   return (
-    <form className="editcard" onSubmit={updateSubmitHandler}>
+    <form className="editcard" onSubmit={handleSubmit(onSubmit)}>
       <div className="editcard__container">
-        <textarea className="editcard__q" defaultValue={readedCard.q} ref={question}></textarea>
-        <textarea className="editcard__a" defaultValue={readedCard.a} ref={answer}></textarea>
+        <textarea 
+          name="q" 
+          className="editcard__q" 
+          defaultValue={readedCard.q} 
+          ref={register({required: true})}
+        ></textarea>
+        { errors.q && <span className="validation_error">Поле обязательно.</span>}
+        <textarea 
+          name="a" 
+          className="editcard__a" 
+          defaultValue={readedCard.a} 
+          ref={register({required: true})}
+        ></textarea>
+        { errors.a && <span className="validation_error">Поле обязательно.</span>}
       </div>
       <div className="editcard__btns">
         <input type="button" onClick={cancelClickHandler} value="Отмена" />

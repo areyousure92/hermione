@@ -401,7 +401,7 @@ button {
 }
 .addcard-form__container .addcard-form__q,
 .addcard-form__container .addcard-form__a {
-  flex: 0 0 50%;
+  flex: 0 1 50%;
   padding: 5px;
   outline: none;
   border: 1px solid #304050;
@@ -540,17 +540,19 @@ button {
 }
 .editcard__container .editcard__q,
 .editcard__container .editcard__a {
-  flex: 0 0 50%;
+  flex: 0 1 50%;
   padding: 5px;
-  font-size: 1em;
-  font-family: Helvetica, Arial, sans-serif;
   outline: none;
+  border: 1px solid #304050;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  resize: none;
 }
 .editcard__container .editcard__q {
-  background-color: rgba(200, 50, 50, .5);
+  background-color: rgba(200, 50, 50, .1);
 }
 .editcard__container .editcard__a {
-  background-color: rgba(50, 200, 50, .5);
+  background-color: rgba(50, 200, 50, .1);
 }
 .editcard__btns {
   flex: 1 0 15%;
@@ -570,6 +572,10 @@ button {
 }
 .editcard__btns input[type="submit"] {
   background-color: rgba(200, 50, 50, .5);
+}
+
+.validation_error {
+  color: rgba(200, 50, 50, 1);
 }
 
 @media (max-width: 1200px) {}

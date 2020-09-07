@@ -2,43 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { createCardFetch } from '../../redux/actions/cardActions';
 import { readDeckFetch } from '../../redux/actions/deckActions';
 import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 
 const AddCard = ({ createCard, userId, readDeck, getUserCardsNumber, }) => {
-  const question = React.useRef();
-  const answer = React.useRef();
+  const { register, handleSubmit, reset, errors } = useForm();
+  const onSubmit = (data) => {
+    createCard(userId, deckId, data)
+      .then(() => getUserCardsNumber(userId))
+      .then(() => readDeck(userId, deckId));
+    reset();
+  };
 
   const { deckId } = useParams();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const cardData = {
-      q: question.current.value,
-      a: answer.current.value,
-    };
-    createCard(userId, deckId, cardData)
-      .then(() => getUserCardsNumber(userId))
-      .then(() => readDeck(userId, deckId));
-    question.current.value = '';
-    answer.current.value = '';
-  };
-
   return (
-    <form className="addcard-form" onSubmit={submitHandler}>
+    <form className="addcard-form" onSubmit={handleSubmit(onSubmit)}>
       <p className="addcard-form__title">Добавить карту</p>
       <div className="addcard-form__container">
         <textarea 
+          name="q"
           className="addcard-form__q" 
           placeholder="Вопрос" 
-          ref={question}
+          ref={register({
+            required: true,
+          })}
         ></textarea>
+        { errors.q && <span className="validation_error">Поле обязательно.</span>}
         <textarea 
+          name="a"
           className="addcard-form__a" 
           placeholder="Ответ" 
-          ref={answer}
+          ref={register({
+            required: true,
+          })}
         ></textarea>
+        { errors.a && <span className="validation_error">Поле обязательно.</span>}
       </div>
       <div className="addcard-form__btns">
         <input type="reset" value="Очистить" />

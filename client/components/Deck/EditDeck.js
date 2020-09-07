@@ -1,25 +1,22 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { updateDeckFetch, readDeckFetch } from '../../redux/actions/deckActions';
 
 const EditDeck = ({ 
   updateDeck, readedDeck, userId, username, readDeck,
 }) => {
-  const history = useHistory();
-  const deckname = useRef();
-  const { deckId } = useParams();
-
-  const updateDeckSubmitHandler = (e) => {
-    e.preventDefault();
-    const deckData = {
-      deckname: deckname.current.value,
-    };
-    updateDeck(userId, deckId, deckData)
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
+    updateDeck(userId, deckId, data)
       .then(() => readDeck(userId, deckId))
-      .then(() => history.push(`/${username}/deck/${deckId}`));
+      .then(() => history.push(`/${data.username}/deck/${deckId}`)); 
   };
+
+  const history = useHistory();
+  const { deckId } = useParams();
 
   const cancelClickHandler = (e) => {
     e.preventDefault();
@@ -27,13 +24,27 @@ const EditDeck = ({
   };
 
   return (
-    <form className="editdeck-form" onSubmit={updateDeckSubmitHandler}>
-      <input type="text" defaultValue={readedDeck.deckname} ref={deckname} />
+    <>
+    <form className="editdeck-form" onSubmit={handleSubmit(onSubmit)}>
+      <input 
+        name="deckname"
+        type="text" 
+        defaultValue={readedDeck.deckname} 
+        ref={register({
+          required: true,
+          minLength: 3,
+          maxLength: 64,
+        })} 
+      />
       <div className="editdeck__btns">
         <input type="button" onClick={cancelClickHandler} value="Отмена" />
         <input type="submit" value="Обновить" />
       </div>
     </form>
+      { errors.deckname && errors.deckname.type=="required" && <span className="validation_error">Нужно ввести название колоды.</span>}
+      { errors.deckname && errors.deckname.type=="minLength" && <span className="validation_error">Название колоды должно быть не меньше 3 символов.</span>}
+      { errors.deckname && errors.deckname.type=="maxLength" && <span className="validation_error">Название колоды должно быть не больше 64 символов.</span>}
+    </>
   );
 };
 

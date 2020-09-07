@@ -1,35 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { 
   createDeckFetch, 
 } from '../../../redux/actions/deckActions';
 
 const CreateDeck = ({ createDeck, userId, getDeckList }) => {
-  const deckname = React.useRef();
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const deckData = {
-      deckname: deckname.current.value,
-    };
-
-    createDeck(deckData, userId)
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
+    createDeck(data, userId)
       .then(getDeckList(userId));
-
-    deckname.current.value = '';
-  }
+  };
 
   return (
-    <form onSubmit={submitHandler} className="decklist__create-deck">
+    <>
+    <form onSubmit={handleSubmit(onSubmit)} className="decklist__create-deck">
       <input 
+        name="deckname"
         className="create-deck__text"
         type="text" 
         placeholder="Новая колода" 
-        ref={deckname}
+        ref={register({
+          required: true,
+          minLength: 3,
+          maxLength: 64,
+        })}
       />
       <input type="submit" className="create-deck__btn" value="Создать" />
     </form>    
+      { errors.deckname && errors.deckname.type=="required" && <span className="validation_error">Нужно ввести название колоды.</span>}
+      { errors.deckname && errors.deckname.type=="minLength" && <span className="validation_error">Название колоды должно быть не меньше 3 символов.</span>}
+      { errors.deckname && errors.deckname.type=="maxLength" && <span className="validation_error">Название колоды должно быть не больше 64 символов.</span>}
+    </>
   );
 }
 
