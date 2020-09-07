@@ -7,6 +7,8 @@ import {
   showCardAnswer,
   hideCardAnswer,
   getCardsToLearn,
+  showLearnSaving,
+  hideLearnSaving,
 } from '../../redux/actions/learnActions';
 import { 
   getCardListFetch, 
@@ -17,6 +19,7 @@ import { getUserCardsNumberFetch } from '../../redux/actions/userActions';
 const LearnCard = ({ 
   cardsToLearn, showAnswer, updateCard, showCardAnswer, userId, 
   getCardList, getCardsToLearnA, hideCardAnswer, getUserCardsNumber,
+  isLearnSavingCard, showLearnSaving, hideLearnSaving,
 }) => {
   const { deckId } = useParams();
 
@@ -84,15 +87,23 @@ const LearnCard = ({
       lastdate: new Date(),
       repeated: cardRepeated + 1,
     };
-
-    updateCard(userId, deckId, currentCardToLearn._id, cardData);
-    getCardList(userId, deckId)
+    
+    showLearnSaving();
+    updateCard(userId, deckId, currentCardToLearn._id, cardData)
+      .then(() => getCardList(userId, deckId))
       .then((cards) => { 
         getCardsToLearnA(cards)
       })
-      .then(() => getUserCardsNumber(userId));
-    hideCardAnswer();
+      .then(() => getUserCardsNumber(userId))
+      .then(() => hideCardAnswer())
+      .then(() => hideLearnSaving());
   };
+
+  if (isLearnSavingCard) {
+    return (
+      <div className="learn-card">Сохранение...</div>
+    );
+  }
 
   if (currentCardToLearn) {
     if (showAnswer) {
@@ -139,12 +150,16 @@ LearnCard.propTypes = {
   showCardAnswer: PropTypes.func.isRequired,
   hideCardAnswer: PropTypes.func.isRequired,
   getUserCardsNumber: PropTypes.func.isRequired,
+  isLearnSavingCard: PropTypes.bool.isRequired,
+  showLearnSaving: PropTypes.func.isRequired,
+  hideLearnSaving: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   cardsToLearn: state.learn.cardsToLearn,
   showAnswer: state.learn.showCardAnswer,
   userId: state.auth.userId,
+  isLearnSavingCard: state.learn.isLearnSavingCard,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -155,6 +170,8 @@ const mapDispatchToProps = (dispatch) => ({
   showCardAnswer: () => dispatch(showCardAnswer()),
   hideCardAnswer: () => dispatch(hideCardAnswer()),
   getUserCardsNumber: (userId) => dispatch(getUserCardsNumberFetch(userId)),
+  showLearnSaving: () => dispatch(showLearnSaving()),
+  hideLearnSaving: () => dispatch(hideLearnSaving()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnCard);

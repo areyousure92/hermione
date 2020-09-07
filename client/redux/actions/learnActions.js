@@ -6,6 +6,8 @@ import {
   GET_DECK_TO_LEARN_ERROR,
   CLEAR_DECK_TO_LEARN,
   CLEAR_CARDS_TO_LEARN,
+  SHOW_LEARN_SAVING,
+  HIDE_LEARN_SAVING,
 } from '../actionTypes';
 import auth from '../../lib/auth/auth-helper';
 
@@ -83,6 +85,18 @@ function clearCardsToLearn() {
   }
 }
 
+function showLearnSaving() {
+  return {
+    type: SHOW_LEARN_SAVING,
+  };
+}
+
+function hideLearnSaving() {
+  return {
+    type: HIDE_LEARN_SAVING,
+  };
+}
+
 export {
   getCardsToLearn,
   showCardAnswer,
@@ -90,5 +104,7 @@ export {
   getDeckToLearnFetch,
   clearDeckToLearn,
   clearCardsToLearn,
+  showLearnSaving,
+  hideLearnSaving,
 };
 

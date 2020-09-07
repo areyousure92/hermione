@@ -6,6 +6,8 @@ import {
   GET_DECK_TO_LEARN_ERROR,
   CLEAR_DECK_TO_LEARN,
   CLEAR_CARDS_TO_LEARN,
+  SHOW_LEARN_SAVING,
+  HIDE_LEARN_SAVING,
 } from '../actionTypes';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   cardsToLearn: [],
   showCardAnswer: false,
   currentCard: null,
+  isLearnSavingCard: false,
 };
 
 const learnReducer = (state = initialState, action) => {
@@ -37,6 +40,12 @@ const learnReducer = (state = initialState, action) => {
 
     case CLEAR_CARDS_TO_LEARN:
       return { ...state, cardsToLearn: [] };
+
+    case SHOW_LEARN_SAVING:
+      return { ...state, isLearnSavingCard: true };
+
+    case HIDE_LEARN_SAVING:
+      return { ...state, isLearnSavingCard: false };
 
     default:
       return state;
