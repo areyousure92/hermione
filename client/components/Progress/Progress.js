@@ -10,7 +10,7 @@ const Progress = ({
   useEffect(() => {
     const fetchUserCards = async (userId) => {
       if (userId) {
-        getUserCardsNumber(userId);
+        await getUserCardsNumber(userId);
       }
     };
     fetchUserCards(userId);

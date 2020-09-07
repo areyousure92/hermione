@@ -10,6 +10,10 @@ import {
   DELETE_CARD_ERROR,
   READ_CARD,
   READ_CARD_ERROR,
+  SHOW_CARD_LOADING,
+  HIDE_CARD_LOADING,
+  CLEAR_CARDLIST,
+  CLEAR_READED_CARD,
 } from '../actionTypes';
 
 function getCardList(cards) {
@@ -191,11 +195,39 @@ function readCardFetch(userId, deckId, cardId) {
       })
 }
 
+function showCardLoading() {
+  return {
+    type: SHOW_CARD_LOADING,
+  };
+}
+
+function hideCardLoading() {
+  return {
+    type: HIDE_CARD_LOADING,
+  };
+}
+
+function clearCardlist() {
+  return {
+    type: CLEAR_CARDLIST,
+  };
+}
+
+function clearReadedCard() {
+  return {
+    type: CLEAR_READED_CARD,
+  };
+}
+
 export {
   getCardListFetch,
   createCardFetch,
   updateCardFetch,
   deleteCardFetch,
   readCardFetch,
+  showCardLoading,
+  hideCardLoading,
+  clearCardlist,
+  clearReadedCard,
 };
 

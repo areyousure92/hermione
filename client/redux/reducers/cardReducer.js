@@ -9,6 +9,10 @@ import {
   DELETE_CARD_ERROR,
   READ_CARD,
   READ_CARD_ERROR,
+  SHOW_CARD_LOADING,
+  HIDE_CARD_LOADING,
+  CLEAR_CARDLIST,
+  CLEAR_READED_CARD,
 } from '../actionTypes';
 
 const initialState = {
@@ -16,6 +20,7 @@ const initialState = {
   updatedCard: {},
   updateCardErrorMessage: '',
   readedCard: null,
+  isCardLoading: true,
 };
 // cosnt initialState = {
 //   cards: [
@@ -57,7 +62,19 @@ const cardReducer = (state = initialState, action) => {
 
     case READ_CARD_ERROR:
       return { ...state, readCardErrorMessage: action.payload };
-    
+
+    case SHOW_CARD_LOADING: 
+      return { ...state, isCardLoading: true };
+
+    case HIDE_CARD_LOADING:
+      return { ...state, isCardLoading: false };
+
+    case CLEAR_CARDLIST:
+      return { ...state, cards: [] };
+
+    case CLEAR_READED_CARD:
+      return { ...state, readedCard: null };
+
     default:
       return state;
   }

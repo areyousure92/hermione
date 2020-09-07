@@ -28,8 +28,8 @@ const DeckSettings = ({
 
   return (
     <div className="deck-settings info">
-      <p>Дата создания: { readedDeck && dateToString(readedDeck.created) }</p>
-      <p>Количество карт: { readedDeck && readedDeck.allCardsNumber }</p>
+      <p>Дата создания: { readedDeck ? dateToString(readedDeck.created) : <span>Загрузка...</span> }</p>
+      <p>Количество карт: { readedDeck ? readedDeck.allCards : <span>Загрузка...</span>}</p>
       <Link className="addcard" to={`${match.url}/addcard`}>Добавить карту</Link>
       <div className="info__container">
         <button className="info__delete" onClick={openModal}>Удалить</button>

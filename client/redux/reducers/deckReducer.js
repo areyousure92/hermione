@@ -8,11 +8,16 @@ import {
   READ_DECK,
   UPDATE_DECK,
   UPDATE_DECK_ERROR,
+  DECK_SHOW_LOADING,
+  DECK_HIDE_LOADING,
+  CLEAR_DECKLIST,
+  CLEAR_READED_DECK,
 } from '../actionTypes';
 
 const initialState = {
   decks: [],
   readedDeck: null,
+  deckIsLoading: true,
 };
 
 const deckReducer = (state = initialState, action) => {
@@ -44,9 +49,22 @@ const deckReducer = (state = initialState, action) => {
     case UPDATE_DECK_ERROR: 
       return { ...state, updateDeckErrorMessage: action.payload };
 
+    case DECK_SHOW_LOADING:
+      return { ...state, deckIsLoading: true };
+
+    case DECK_HIDE_LOADING:
+      return { ...state, deckIsLoading: false };
+    
+    case CLEAR_DECKLIST:
+      return { ...state, decks: [] };
+
+    case CLEAR_READED_DECK:
+      return { ...state, readedDeck: null };
+
     default:
       return state;
   }
 }
 
 export default deckReducer;
+

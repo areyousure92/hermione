@@ -26,8 +26,8 @@ const Learn = ({
 
   useEffect(() => {
     const fetchCardList = async (userId, deckId) => {
-      getDeckToLearn(userId, deckId);
-      getCardList(userId, deckId)
+      await getDeckToLearn(userId, deckId);
+      await getCardList(userId, deckId)
         .then((cards) => { 
           getCardsToLearnA(cards)
         });

@@ -4,6 +4,8 @@ import {
   HIDE_CARD_ANSWER,
   GET_DECK_TO_LEARN,
   GET_DECK_TO_LEARN_ERROR,
+  CLEAR_DECK_TO_LEARN,
+  CLEAR_CARDS_TO_LEARN,
 } from '../actionTypes';
 import auth from '../../lib/auth/auth-helper';
 
@@ -67,7 +69,18 @@ function getDeckToLearnFetch(userId, deckId) {
           dispatch(getDeckToLearn(data));
         }
       });
+}
 
+function clearDeckToLearn() {
+  return {
+    type: CLEAR_DECK_TO_LEARN,
+  };
+}
+
+function clearCardsToLearn() {
+  return {
+    type: CLEAR_CARDS_TO_LEARN,
+  }
 }
 
 export {
@@ -75,5 +88,7 @@ export {
   showCardAnswer,
   hideCardAnswer,
   getDeckToLearnFetch,
+  clearDeckToLearn,
+  clearCardsToLearn,
 };
 

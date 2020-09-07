@@ -9,6 +9,10 @@ import {
   READ_DECK,
   UPDATE_DECK,
   UPDATE_DECK_ERROR,
+  DECK_SHOW_LOADING,
+  DECK_HIDE_LOADING,
+  CLEAR_DECKLIST,
+  CLEAR_READED_DECK,
 } from '../actionTypes';
 
 function getDeckList(decks) {
@@ -165,11 +169,39 @@ function updateDeckFetch(userId, deckId, deckData) {
       });
 }
 
+function showDeckLoading() {
+  return {
+    type: DECK_SHOW_LOADING,
+  };
+}
+
+function hideDeckLoading() {
+  return {
+    type: DECK_HIDE_LOADING,
+  };
+}
+
+function clearDeckList() {
+  return {
+    type: CLEAR_DECKLIST,
+  };
+}
+
+function clearReadedDeck() {
+  return {
+    type: CLEAR_READED_DECK,
+  };
+}
+
 export {
   getDeckListFetch,
   createDeckFetch,
   deleteDeckFetch,
   readDeckFetch,
-  updateDeckFetch
+  updateDeckFetch,
+  showDeckLoading,
+  hideDeckLoading,
+  clearDeckList,
+  clearReadedDeck,
 };
 

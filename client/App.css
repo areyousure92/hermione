@@ -126,16 +126,22 @@ button {
   flex-flow: column;
 }
 .main__header .title {
-  flex: 0 0 50%;
+  flex: 0 0 40px;
+  height: 100%;
   font-size: 1.2em;
   letter-spacing: 2px;
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main__header .nav {
-  flex: 0 0 50%;
+  flex: 0 0 40px;
   margin-bottom: 5px;
   border-bottom: 1px solid #304050;
   display: flex;
+  align-items: stretch;
 }
 .main__header .nav a {
   text-decoration: none;
@@ -144,6 +150,8 @@ button {
   border: 1px solid #304050;
   border-left: none;
   border-bottom: none;
+  display: flex;
+  align-items: center;
 }
 .main__header .nav a.active {
   background-color: #85b3e0;
@@ -161,6 +169,8 @@ button {
 
 .main__body .decklist {
   flex: 1 0 auto;
+
+  transition: all 1s;
   
   display: flex;
   flex-flow: column;
@@ -214,6 +224,7 @@ button {
   flex: 1 1 auto;
 
   background-color: #85b3e0;
+  max-width: 80%;
 
   display: flex;
   align-items: center;
@@ -226,6 +237,9 @@ button {
   flex: 0 0 40%;
 
   padding-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .decklist__item .item__container .cards-number {
   flex: 0 0 60%;
@@ -252,7 +266,7 @@ button {
 }
 
 .decklist__item .learn {
-  flex: 0 0 80px;
+  flex: 0 0 20%;
 
   height: 100%;
   background-color: #40b855;
@@ -314,6 +328,7 @@ button {
 
   list-style-type: none;
   overflow-y: auto;
+  transition: 1s;
 
   display: flex;
   flex-flow: column;

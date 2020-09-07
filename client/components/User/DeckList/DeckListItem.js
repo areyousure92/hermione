@@ -2,15 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { clearReadedDeck } from '../../../redux/actions/deckActions';
 
 const DeckListItem = ({ 
-  deckname, deckId, username, allCardsNumber, todaysCardsNumber, newCards,
-  repeatedCards,
+  deckname, deckId, username, 
+  allCardsNumber, todaysCardsNumber, newCards,
+  repeatedCards, clearReadedDeck,
 }) => {
   const history = useHistory();
 
   const clickHandler = (e) => {
     e.preventDefault();
+    clearReadedDeck();
     history.push(`/${username}/deck/${deckId}`);
   };
 
@@ -44,5 +47,9 @@ const mapStateToProps = (state) => ({
   username: state.auth.username,
 });
 
-export default connect(mapStateToProps)(DeckListItem);
+const mapDispatchToProps = (dispatch) => ({
+  clearReadedDeck: () => dispatch(clearReadedDeck()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckListItem);
 

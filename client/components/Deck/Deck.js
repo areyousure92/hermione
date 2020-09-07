@@ -11,26 +11,41 @@ import {
 import CardList from './CardList/CardList';
 import AddCard from './AddCard';
 import EditDeck from './EditDeck';
-import { readDeckFetch } from '../../redux/actions/deckActions';
+import { 
+  readDeckFetch, 
+  showDeckLoading, 
+  hideDeckLoading, 
+} from '../../redux/actions/deckActions';
+import { clearCardlist } from '../../redux/actions/cardActions';
 import MainHeader from '../ui/MainHeader/MainHeader';
 import MainBody from '../ui/MainBody/MainBody';
 import DeckSettings from './DeckSettings';
 
-const Deck = ({ userId, readDeck, readedDeck }) => {
+const Deck = ({ 
+  userId, readDeck, readedDeck, 
+  showDeckLoading, hideDeckLoading, 
+  deckIsLoading, clearCardlist,
+}) => {
   const match = useRouteMatch();
   const { username, deckId } = useParams();
-  
+
   useEffect(() => {
     const fetchReadDeck = async (userId) => {
-      readDeck(userId, deckId);
+      await readDeck(userId, deckId);
     }
-    fetchReadDeck(userId);
+    clearCardlist();
+    showDeckLoading();
+    fetchReadDeck(userId)
+      .then(() => hideDeckLoading())
   }, [userId, deckId]);
 
   return (
     <>
       <MainHeader>
-        <div className="title">{ readedDeck && readedDeck.deckname }</div>
+        { deckIsLoading
+            ? <div className="title">Загрузка...</div>
+            : <div className="title">{ readedDeck && readedDeck.deckname }</div>
+        }
         <div className="nav">
           <Link to={`/${username}/decklist`}>На главную</Link>
           <Link to={`${match.url}`}>Колода</Link>
@@ -67,15 +82,23 @@ Deck.propTypes = {
   readDeck: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
   readedDeck: PropTypes.object,
+  showDeckLoading: PropTypes.func.isRequired,
+  hideDeckLoading: PropTypes.func.isRequired,
+  deckIsLoading: PropTypes.bool.isRequired,
+  clearCardlist: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
   readedDeck: state.deck.readedDeck,
+  deckIsLoading: state.deck.deckIsLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   readDeck: (userId, deckId) => dispatch(readDeckFetch(userId, deckId)),
+  showDeckLoading: () => dispatch(showDeckLoading()),
+  hideDeckLoading: () => dispatch(hideDeckLoading()),
+  clearCardlist: () => dispatch(clearCardlist()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck);

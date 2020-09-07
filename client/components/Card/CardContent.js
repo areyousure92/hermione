@@ -6,11 +6,12 @@ const CardContent = ({ readedCard }) => {
 
   return (
     <div className="card-content">
-      { readedCard && 
+      { readedCard ?
         <>
           <div className="card-content__q">{ readedCard.q }</div>
           <div className="card-content__a">{ readedCard.a }</div>
         </>
+        : <div>Загрузка...</div>
       }
     </div>
   );

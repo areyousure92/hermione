@@ -23,7 +23,7 @@ const Card = ({
 
   useEffect(() => {
     const fetchReadCard = async (userId, deckId, cardId) => {
-      readCard(userId, deckId, cardId);
+      await readCard(userId, deckId, cardId);
     };
     fetchReadCard(userId, deckId, cardId);
   }, [userId, deckId, cardId]);

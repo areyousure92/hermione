@@ -4,6 +4,8 @@ import {
   HIDE_CARD_ANSWER,
   GET_DECK_TO_LEARN,
   GET_DECK_TO_LEARN_ERROR,
+  CLEAR_DECK_TO_LEARN,
+  CLEAR_CARDS_TO_LEARN,
 } from '../actionTypes';
 
 const initialState = {
@@ -29,6 +31,12 @@ const learnReducer = (state = initialState, action) => {
 
     case GET_DECK_TO_LEARN_ERROR: 
       return { ...state, getDeckToLearnErrorMessage: action.payload };
+
+    case CLEAR_DECK_TO_LEARN:
+      return { ...state, deckToLearn: null };
+
+    case CLEAR_CARDS_TO_LEARN:
+      return { ...state, cardsToLearn: [] };
 
     default:
       return state;
